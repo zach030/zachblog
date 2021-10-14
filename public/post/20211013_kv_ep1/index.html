@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>Start-Up KV-1 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="KV引擎 Episode 1 " />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://zachless.design/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="http://zachless.design/an-old-hope.min.css" />
+  <script
+    defer
+    src="http://zachless.design/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="http://zachless.design/theme.png" />
+
+  
+  <link rel="preload" as="image" href="http://zachless.design/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://zachless.design/github.svg" />
+  
+  <link rel="preload" as="image" href="http://zachless.design/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="http://zachless.design/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://zachless.design/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.88.1" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Start-Up KV-1" />
+<meta property="og:description" content="从零到一实现kv存储引擎" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zachless.design/post/20211013_kv_ep1/" /><meta property="article:section" content="post" />
+
+
+
+
+  
+  <meta itemprop="name" content="Start-Up KV-1">
+<meta itemprop="description" content="从零到一实现kv存储引擎">
+
+<meta itemprop="wordCount" content="3">
+<meta itemprop="keywords" content="database,kv," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Start-Up KV-1"/>
+<meta name="twitter:description" content="从零到一实现kv存储引擎"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="http://zachless.design/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+    <a class="" href="/tags/">Tags</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Jan 1, 1</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>Start-Up KV-1</h1>
+  </header>
+  <section class="post-content"><h1 id="kv引擎-episode-1">KV引擎 Episode 1</h1>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="http://zachless.design/tags/database">database</a>
+     
+    <a href="http://zachless.design/tags/kv">kv</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+    
+    <a class="prev" href="http://zachless.design/post/emoji-support/"><span>←</span><span>Emoji Support</span></a>
+     
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2021 <a href="http://zachless.design/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>
