@@ -56,3 +56,33 @@ tags = [
         left++
     }
 ```
+
+## 题解
+
+[LeetCode-3](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+```go
+func lengthOfLongestSubstring(s string) int {
+    window := make(map[uint8]int)
+    size := 0
+    left,right := 0,0
+    for right < len(s){
+        ch := s[right]
+        window[ch]++
+        right++
+        for window[ch]>1{
+            lc := s[left]
+            window[lc]--
+            left++
+        }
+        size = max(size,right-left)
+    }
+    return size
+}
+
+func max(a,b int)int{
+    if a>b{
+        return a
+    }
+    return b
+}
+```
