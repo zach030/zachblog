@@ -7,7 +7,33 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode-3 无重复字符最长字串</title>
+      <link>http://zachless.design/post/leetcode_3/</link>
+      <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/leetcode_3/</guid>
+      <description>无重复字符最长子串  给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度
+ 示例
+ 输入: s = &amp;ldquo;abcabcbb&amp;rdquo; 输出: 3 解释: 因为无重复字符的最长子串是 &amp;ldquo;abc&amp;rdquo;，所以其长度为 3。
+ 滑动窗口题目的模板 根据模板，可以看出滑动窗口可分为向右扩大窗口，和从左边缩小窗口
+left,right :=0,0 for right &amp;lt; len(str){ // 向右扩大窗口  window[str[right]]++ right++ // 从左边起缩小窗口  for window need shrink { delete(window, str[left]) left++ } } 思路 使用左右指针控制子串边界，检验是否有重复元素可通过map来实现，关键点是当发现重复元素时，左右指针该如何移动
+测试用例
+ abcabcbb
+  当 left=0,right=2 时，子串为 abc 满足无重复条件 right 再向后移动，遇到元素 a，通过map的校验可以发现出现重复元素 此时 left 需要移动，终止条件就是[left,right]区间内无重复元素，而可能的重复元素就是right所指向的元素  因此可以写出窗口收缩的部分代码
+// rightChar: right指针所指向的元素，当前窗口内的重复元素  // 窗口收缩代码  for window[rightChar]&amp;gt;1{ leftChar := s[left] window[leftChar]-- left++ } 题解 LeetCode-3</description>
+    </item>
+    
+    <item>
+      <title>Start-Up KV引擎-1</title>
+      <link>http://zachless.design/post/kv_engine_ep1/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/kv_engine_ep1/</guid>
+      <description>KV引擎 Episode 1 </description>
+    </item>
+    
     <item>
       <title></title>
       <link>http://zachless.design/archives/</link>
@@ -36,30 +62,12 @@
     </item>
     
     <item>
-      <title>Placeholder Text</title>
-      <link>http://zachless.design/post/placeholder-text/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://zachless.design/post/placeholder-text/</guid>
-      <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Math Typesetting</title>
       <link>http://zachless.design/post/math-typesetting/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>http://zachless.design/post/math-typesetting/</guid>
       <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Emoji Support</title>
-      <link>http://zachless.design/post/emoji-support/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://zachless.design/post/emoji-support/</guid>
-      <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -71,15 +79,6 @@
       <description>Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
 Hugo makes use of a variety of open source projects including:
  https://github.</description>
-    </item>
-    
-    <item>
-      <title>Start-Up KV-1</title>
-      <link>http://zachless.design/post/20211013_kv_ep1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://zachless.design/post/20211013_kv_ep1/</guid>
-      <description>KV引擎 Episode 1 </description>
     </item>
     
   </channel>
