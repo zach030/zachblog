@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL--总体架构</title>
+      <link>http://zachless.design/post/mysql_arch/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/mysql_arch/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Start-Up KV引擎-1</title>
       <link>http://zachless.design/post/kv_engine_ep1/</link>
