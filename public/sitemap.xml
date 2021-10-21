@@ -3,7 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://zachless.design/</loc>
-<<<<<<< HEAD
     <lastmod>2021-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/distributed_system/</loc>
@@ -20,22 +19,23 @@
   </url><url>
     <loc>http://zachless.design/post/distributed_system/</loc>
     <lastmod>2021-10-21T00:00:00+00:00</lastmod>
-=======
+  </url><url>
+    <loc>http://zachless.design/tags/heap-sort/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/leetcode/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://zachless.design/post/leetcode_251/</loc>
+    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://zachless.design/post/leetcode_3/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://zachless.design/post/</loc>
+    <loc>http://zachless.design/tags/quick-sort/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/slide-window/</loc>
-    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://zachless.design/tags/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/database/</loc>
@@ -46,7 +46,6 @@
   </url><url>
     <loc>http://zachless.design/post/kv_engine_ep1/</loc>
     <lastmod>2021-10-13T00:00:00+00:00</lastmod>
->>>>>>> 311a0a9414d6aa63f3e9c966c07d9bf0df34b10f
   </url><url>
     <loc>http://zachless.design/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
@@ -94,18 +93,5 @@
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/index/</loc>
-<<<<<<< HEAD
-  </url><url>
-    <loc>http://zachless.design/tags/kv/</loc>
-  </url><url>
-    <loc>http://zachless.design/tags/leetcode/</loc>
-  </url><url>
-    <loc>http://zachless.design/post/leetcode_3/</loc>
-  </url><url>
-    <loc>http://zachless.design/tags/slide-window/</loc>
-  </url><url>
-    <loc>http://zachless.design/post/20211013_kv_ep1/</loc>
-=======
->>>>>>> 311a0a9414d6aa63f3e9c966c07d9bf0df34b10f
   </url>
 </urlset>
