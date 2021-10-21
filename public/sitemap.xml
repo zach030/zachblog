@@ -5,7 +5,16 @@
     <loc>http://zachless.design/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://zachless.design/tags/concurrent/</loc>
+    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://zachless.design/tags/heap-sort/</loc>
+    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://zachless.design/tags/leetcode/</loc>
+    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://zachless.design/post/leetcode_251/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/post/leetcode_3/</loc>
@@ -14,10 +23,16 @@
     <loc>http://zachless.design/post/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://zachless.design/tags/quick-sort/</loc>
+    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://zachless.design/tags/slide-window/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/</loc>
+    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://zachless.design/post/concurrent_code/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://zachless.design/tags/database/</loc>

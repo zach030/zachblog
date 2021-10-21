@@ -9,6 +9,15 @@
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
     <lastBuildDate>Thu, 14 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Leetcode-251 数组中的第K个最大元素</title>
+      <link>http://zachless.design/post/leetcode_251/</link>
+      <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/leetcode_251/</guid>
+      <description>数组中的第K个最大元素 </description>
+    </item>
+    
+    <item>
       <title>Leetcode-3 无重复字符最长字串</title>
       <link>http://zachless.design/post/leetcode_3/</link>
       <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
@@ -23,6 +32,17 @@ left,right :=0,0 for right &amp;lt; len(str){ // 向右扩大窗口  window[str[
  abcabcbb
   当 left=0,right=2 时，子串为 abc 满足无重复条件 right 再向后移动，遇到元素 a，通过map的校验可以发现出现重复元素 此时 left 需要移动，终止条件就是[left,right]区间内无重复元素，而可能的重复元素就是right所指向的元素  因此可以写出窗口收缩的部分代码
 // rightChar: right指针所指向的元素，当前窗口内的重复元素  // 窗口收缩代码  for window[rightChar]&amp;gt;1{ leftChar := s[left] window[leftChar]-- left++ } 题解 LeetCode-3</description>
+    </item>
+    
+    <item>
+      <title>并发编程挑战--多线程交替打印</title>
+      <link>http://zachless.design/post/concurrent_code/</link>
+      <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/concurrent_code/</guid>
+      <description>多线程交替打印 题目: 多线程面试题
+热身 面试OceanBase的时候，出了一道算法题，两个线程交替打印1-100 使用go来解决此问题，使用两个go协程，
+func concurrentPrint() { even, odd := make(chan struct{}, 1), make(chan struct{}, 1) even &amp;lt;- struct{}{} count := 1 var wg sync.WaitGroup go func() { wg.Add(1) for count &amp;lt;= 99 { select { case &amp;lt;-even: fmt.Println(&amp;#34;t-1: &amp;#34;, count) count++ odd &amp;lt;- struct{}{} } } wg.Done() }() go func() { wg.Add(1) for count &amp;lt;= 100 { select { case &amp;lt;-odd: fmt.Println(&amp;#34;t-2: &amp;#34;, count) count++ even &amp;lt;- struct{}{} } } wg.</description>
     </item>
     
     <item>
