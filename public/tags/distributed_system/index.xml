@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>distributed_system on ZachBlog</title>
+    <link>http://zachless.design/tags/distributed_system/</link>
+    <description>Recent content in distributed_system on ZachBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ch</language>
+    <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/distributed_system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>走入分布式系统</title>
+      <link>http://zachless.design/post/distributed_system/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/distributed_system/</guid>
+      <description>走入分布式系统 </description>
+    </item>
+    
+  </channel>
+</rss>
