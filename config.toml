@@ -32,11 +32,6 @@ title = "ZachBlog"
     name = "Post"
     url = "/post/"
     weight = 10
-  [[menu.main]]
-    identifier = "tags"
-    name = "Tags"
-    url = "/tags/"
-    weight = 10
 
 [taxonomies]
 category = "categories"

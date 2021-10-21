@@ -7,6 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
+<<<<<<< HEAD
     <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/index.xml" rel="self" type="application/rss+xml" />
+=======
+    <lastBuildDate>Thu, 14 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/index.xml" rel="self" type="application/rss+xml" />
+>>>>>>> 311a0a9414d6aa63f3e9c966c07d9bf0df34b10f
   </channel>
 </rss>

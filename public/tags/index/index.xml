@@ -10,7 +10,11 @@
     <item>
       <title>Posts</title>
       <link>http://zachless.design/post/</link>
+<<<<<<< HEAD
       <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
+>>>>>>> 311a0a9414d6aa63f3e9c966c07d9bf0df34b10f
       
       <guid>http://zachless.design/post/</guid>
       <description></description>

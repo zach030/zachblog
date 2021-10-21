@@ -1,7 +1,7 @@
 +++
 author = "zach zhou"
-title = "Leetcode Solution 3"
-date = "2021-1014"
+title = "Leetcode-3 无重复字符最长字串"
+date = "2021-10-14"
 description = "无重复字符最长字串"
 tags = [
     "leetcode",
