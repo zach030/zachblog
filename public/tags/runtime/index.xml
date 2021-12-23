@@ -14,7 +14,7 @@
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>http://zachless.design/post/dapr/</guid>
-      <description></description>
+      <description>Dapr学习笔记 首先将从dapr的整体架构入手，再逐个模块进行深入源码的分析，一起深入Runtime的世界！</description>
     </item>
     
   </channel>
