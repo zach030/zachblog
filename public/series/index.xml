@@ -8,5 +8,14 @@
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
     <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Themes Guide</title>
+      <link>http://zachless.design/series/themes-guide/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/series/themes-guide/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
