@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>life on ZachBlog</title>
+    <link>http://zachless.design/tags/life/</link>
+    <description>Recent content in life on ZachBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ch</language>
+    <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>学会表达</title>
+      <link>http://zachless.design/post/how-to-express/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/how-to-express/</guid>
+      <description>How to express 我一直认为无法清楚表达自己的想法是一个弱点。
+我常常就是脑袋里想法很多，但是到要说出来，发表出来的时候就很一时语塞，不知如何组织语言，觉得只言片语无法清楚的阐述内心想法，话一多又觉得扯得太远，偏离核心。
+其实在 2020 年刚开始实习的时候，在 leader 的推荐下阅读了《金字塔理论》，读过的书就是水一样流逝，如今令我记忆深刻的点也只剩下：说话先说结论，分点陈述（这个点也缺少上下文，或许有失偏颇）。这本书值得再读，尤其在正式进去工作之后。
+ 知乎回答 如何表达？ 分块解决 （Divide and Conquer）和逻辑链 ( Chain )
+ 简而言之：先分块，再对每一块分点阐述。整个逻辑思维是比较简单的，重点就是在日常生活中锻炼自己的语言组织表达能力。
+ 先说论点，再说逻辑：对于听者/读者而言，是带着论点去读逻辑，是一种主动参与论证的过程 每次要把想法表达出来时：按照固定的格式在心里梳理一遍   结论：XXX; 理由：原因1：; 原因2：; ……; 原因N：
+ 总结  先说论点，再分块，分点阐述 形成：结论--&amp;gt;原因 的思维格式 再好好读下《金字塔理论》  </description>
+    </item>
+    
+  </channel>
+</rss>

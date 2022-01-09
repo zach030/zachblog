@@ -7,7 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 23 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>学会表达</title>
+      <link>http://zachless.design/post/how-to-express/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/how-to-express/</guid>
+      <description>How to express 我一直认为无法清楚表达自己的想法是一个弱点。
+我常常就是脑袋里想法很多，但是到要说出来，发表出来的时候就很一时语塞，不知如何组织语言，觉得只言片语无法清楚的阐述内心想法，话一多又觉得扯得太远，偏离核心。
+其实在 2020 年刚开始实习的时候，在 leader 的推荐下阅读了《金字塔理论》，读过的书就是水一样流逝，如今令我记忆深刻的点也只剩下：说话先说结论，分点陈述（这个点也缺少上下文，或许有失偏颇）。这本书值得再读，尤其在正式进去工作之后。
+ 知乎回答 如何表达？ 分块解决 （Divide and Conquer）和逻辑链 ( Chain )
+ 简而言之：先分块，再对每一块分点阐述。整个逻辑思维是比较简单的，重点就是在日常生活中锻炼自己的语言组织表达能力。
+ 先说论点，再说逻辑：对于听者/读者而言，是带着论点去读逻辑，是一种主动参与论证的过程 每次要把想法表达出来时：按照固定的格式在心里梳理一遍   结论：XXX; 理由：原因1：; 原因2：; ……; 原因N：
+ 总结  先说论点，再分块，分点阐述 形成：结论--&amp;gt;原因 的思维格式 再好好读下《金字塔理论》  </description>
+    </item>
+    
+    <item>
+      <title>经济学原理</title>
+      <link>http://zachless.design/post/economic-theory/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/economic-theory/</guid>
+      <description>经济学的三类问题  这三类问题涵盖了由微观到宏观经济学
+  人们如何做决策 How People Make Decisions 人们如何相互作用 How People Interact 整体经济如何运行 How the Economy as a Whole Works  人们如何做决策  权衡 tradeoffs  看问题不是单点，多视角权衡   成本 cost  某物的成本是为此放弃的东西，区别于直接的生产成本   边际 margin  细小的变化引起的变化   激励 incentives  人们对激励做出反应    人们如何相互作用  交易 trade  交易使得双方受益   市场 market  市场通常是组织经济的好方式，“invisble hand”   政府 government  政府可以改进市场    整体经济如何运行  生产 production  由生产率衡量，高生产率&amp;ndash;&amp;gt;高生产水平   货币 money 通胀与失业 inflation and unemployment  经济中整体物价水平的上升    </description>
+    </item>
+    
     <item>
       <title>Dapr学习笔记</title>
       <link>http://zachless.design/post/dapr/</link>
@@ -41,15 +66,6 @@ Cubox：长文本、各平台文章汇总的收藏夹
 滴答清单：TODO待办事项汇总
 3. 知识输出 飞书文档：有体系的总结、笔记等知识
 博客：基于文档的知识的汇总与归纳</description>
-    </item>
-    
-    <item>
-      <title>经济学原理</title>
-      <link>http://zachless.design/post/economic-theory/</link>
-      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://zachless.design/post/economic-theory/</guid>
-      <description>什么是经济学 </description>
     </item>
     
     <item>
