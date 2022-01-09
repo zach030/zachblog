@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>economic on ZachBlog</title>
+    <link>http://zachless.design/tags/economic/</link>
+    <description>Recent content in economic on ZachBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ch</language>
+    <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
+    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/economic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>经济学原理</title>
+      <link>http://zachless.design/post/economic-theory/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://zachless.design/post/economic-theory/</guid>
+      <description>什么是经济学 </description>
+    </item>
+    
+  </channel>
+</rss>
