@@ -16,3 +16,43 @@ https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg
 
 链表删除元素，一定是需要记录指针的`next`和`next.next`或双指针，通过改变`next`指针来完成删除操作。在遍历链表的循环内部还需要一个for循环，来跳过重复的元素，示例如下：
 > 1 --> 2 --> 3 --> 3 --> 4 --> 4 --> 5
+
+`curr`指针指向head的前一个假头指针，判断`curr.next`(1)与`curr.next.next`(2)不相等，因此curr向后递推，当curr指向2时，发现next与next.next都为3，需要删除重复元素，因此进入内嵌循环，当curr.val!=3，通过循环后curr指向4，同理4也会跳过，最后指向5，因此最后得到链表：
+> 1 --> 2 --> 5
+
+**tips**
+在操作链表时，通常需要一个虚拟的假头节点
+```go
+    dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head
+    ...
+    return dummy.Next
+```
+
+### 题解
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func deleteDuplicates(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+	dummy := &ListNode{Next: head}
+	curr := dummy
+	for curr.Next != nil && curr.Next.Next != nil {
+		if curr.Next.Val == curr.Next.Next.Val {
+			val := curr.Next.Val
+			for curr.Next != nil && curr.Next.Val == val {
+				curr.Next = curr.Next.Next
+			}
+			continue
+		}
+		curr = curr.Next
+	}
+	return dummy.Next
+}
+```
