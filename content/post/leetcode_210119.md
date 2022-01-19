@@ -1,7 +1,7 @@
 +++
 author = "zach zhou"
 title = "Leetcode-DailyCode"
-date = "2021-01-19"
+date = "2022-01-19"
 description = "2021-01-19"
 tags = [
     "leetcode",
