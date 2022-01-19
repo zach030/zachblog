@@ -23,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   
-  <title>Leetcode-DailyCode-0119 - ZachBlog</title>
+  <title>DailyCode-0119 - ZachBlog</title>
 
   
   
@@ -84,7 +84,7 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
   
   
   
-  <meta property="og:title" content="Leetcode-DailyCode-0119" />
+  <meta property="og:title" content="DailyCode-0119" />
 <meta property="og:description" content="2021-01-19" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zachless.design/post/leetcode_210119/" /><meta property="article:section" content="post" />
@@ -93,14 +93,14 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
 
 
   
-  <meta itemprop="name" content="Leetcode-DailyCode-0119">
+  <meta itemprop="name" content="DailyCode-0119">
 <meta itemprop="description" content="2021-01-19"><meta itemprop="datePublished" content="2022-01-19T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-01-19T00:00:00+00:00" />
-<meta itemprop="wordCount" content="116">
+<meta itemprop="wordCount" content="187">
 <meta itemprop="keywords" content="leetcode,double_pointer," />
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Leetcode-DailyCode-0119"/>
+<meta name="twitter:title" content="DailyCode-0119"/>
 <meta name="twitter:description" content="2021-01-19"/>
 
   
@@ -184,7 +184,7 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
       <span>zach zhou</span>
       
     </p>
-    <h1>Leetcode-DailyCode-0119</h1>
+    <h1>DailyCode-0119</h1>
   </header>
   <section class="post-content"><h2 id="删除排序链表中的重复元素httpsleetcode-cncomproblemsremove-duplicates-from-sorted-list-ii"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/">删除排序链表中的重复元素</a></h2>
 <blockquote>
@@ -229,7 +229,36 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
 	}
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dummy</span>.<span style="color:#a6e22e">Next</span>
 }
-</code></pre></div></section>
+</code></pre></div><h2 id="区间列表交集httpsleetcode-cncomproblemsinterval-list-intersections"><a href="https://leetcode-cn.com/problems/interval-list-intersections/">区间列表交集</a></h2>
+<blockquote>
+<p>求两个区间列表的交集，根据下列给出的图片可以很容易理解题意
+输入：firstList = [[0,2],[5,10],[13,23],[24,25]], secondList = [[1,5],[8,12],[15,24],[25,26]]
+输出：[[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]</p>
+</blockquote>
+<p><img src="https://assets.leetcode.com/uploads/2019/01/30/interval1.png" alt="pic"></p>
+<p><strong>思考</strong></p>
+<p>题目中每个区间列表都是成对不相交，因此对于A和B中的任一某子区间，都至多与一个子区间会重叠。</p>
+<p>从左边开始遍历，当求出两者第一个交集之后，需要将尾端较小的子区间向后移，下次比较后一个区间</p>
+<p><strong>代码</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">intervalIntersection</span>(<span style="color:#a6e22e">firstList</span> [][]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">secondList</span> [][]<span style="color:#66d9ef">int</span>) [][]<span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">ret</span> <span style="color:#f92672">:=</span> make([][]<span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">0</span>)
+	<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">firstList</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">j</span> &lt; len(<span style="color:#a6e22e">secondList</span>) {
+		<span style="color:#a6e22e">low</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">firstList</span>[<span style="color:#a6e22e">i</span>][<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">secondList</span>[<span style="color:#a6e22e">j</span>][<span style="color:#ae81ff">0</span>])
+		<span style="color:#a6e22e">high</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">min</span>(<span style="color:#a6e22e">firstList</span>[<span style="color:#a6e22e">i</span>][<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">secondList</span>[<span style="color:#a6e22e">j</span>][<span style="color:#ae81ff">1</span>])
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">low</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">high</span> {
+			<span style="color:#a6e22e">ret</span> = append(<span style="color:#a6e22e">ret</span>, []<span style="color:#66d9ef">int</span>{<span style="color:#a6e22e">low</span>, <span style="color:#a6e22e">high</span>})
+		}
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">firstList</span>[<span style="color:#a6e22e">i</span>][<span style="color:#ae81ff">1</span>] &lt; <span style="color:#a6e22e">secondList</span>[<span style="color:#a6e22e">j</span>][<span style="color:#ae81ff">1</span>] {
+			<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>
+		}<span style="color:#66d9ef">else</span>{
+			<span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>
+		}
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>
+}
+</code></pre></div><h2 id="盛最多水的容器">盛最多水的容器</h2>
+</section>
 
   
   

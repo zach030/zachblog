@@ -1,6 +1,6 @@
 +++
 author = "zach zhou"
-title = "Leetcode-DailyCode-0119"
+title = "DailyCode-0119"
 date = "2022-01-19"
 description = "2021-01-19"
 tags = [
@@ -54,3 +54,42 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	return dummy.Next
 }
 ```
+
+## [区间列表交集](https://leetcode-cn.com/problems/interval-list-intersections/)
+
+> 求两个区间列表的交集，根据下列给出的图片可以很容易理解题意
+输入：firstList = [[0,2],[5,10],[13,23],[24,25]], secondList = [[1,5],[8,12],[15,24],[25,26]]
+输出：[[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+
+![pic](https://assets.leetcode.com/uploads/2019/01/30/interval1.png)
+
+**思考**
+
+题目中每个区间列表都是成对不相交，因此对于A和B中的任一某子区间，都至多与一个子区间会重叠。
+
+从左边开始遍历，当求出两者第一个交集之后，需要将尾端较小的子区间向后移，下次比较后一个区间
+
+**代码**
+
+```go
+func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
+	ret := make([][]int, 0)
+	i, j := 0, 0
+	for i < len(firstList) && j < len(secondList) {
+		low := max(firstList[i][0], secondList[j][0])
+		high := min(firstList[i][1], secondList[j][1])
+		if low <= high {
+			ret = append(ret, []int{low, high})
+		}
+		if firstList[i][1] < secondList[j][1] {
+			i++
+		}else{
+			j++
+		}
+	}
+	return ret
+}
+```
+
+
+## 盛最多水的容器
