@@ -23,11 +23,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   
-  <title>Dapr学习笔记 - ZachBlog</title>
+  <title>Leetcode-DailyCode - ZachBlog</title>
 
   
   
-  <meta name="description" content="Dapr学习笔记 首先将从dapr的整体架构入手，再逐个模块进行深入源码的分析，一起深入Runtime的世界！" />
+  <meta name="description" content="删除排序链表中的重复元素 https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg
+ 存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现 的数字
+ 链表删除元素，一定是需要记录指针的next和next.next或双指针，通过改变next指针来完成删除操作。在遍历链表的循环内部还需要一个for循环，来跳过重复的元素，示例如下：
+ 1 &ndash;&gt; 2 &ndash;&gt; 3 &ndash;&gt; 3 &ndash;&gt; 4 &ndash;&gt; 4 &ndash;&gt; 5
+ " />
   <meta name="author" content="zach zhou" />
   
 
@@ -78,24 +82,24 @@
   
   
   
-  <meta property="og:title" content="Dapr学习笔记" />
-<meta property="og:description" content="Dapr整体架构" />
+  <meta property="og:title" content="Leetcode-DailyCode" />
+<meta property="og:description" content="2021-01-19" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zachless.design/post/dapr/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-23T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-12-23T00:00:00+00:00" />
+<meta property="og:url" content="http://zachless.design/post/leetcode_210119/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-10-14T00:00:00+00:00" />
 
 
   
-  <meta itemprop="name" content="Dapr学习笔记">
-<meta itemprop="description" content="Dapr整体架构"><meta itemprop="datePublished" content="2021-12-23T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-12-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2">
-<meta itemprop="keywords" content="runtime," />
+  <meta itemprop="name" content="Leetcode-DailyCode">
+<meta itemprop="description" content="2021-01-19"><meta itemprop="datePublished" content="2021-10-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-10-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="21">
+<meta itemprop="keywords" content="leetcode,double_pointer," />
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Dapr学习笔记"/>
-<meta name="twitter:description" content="Dapr整体架构"/>
+<meta name="twitter:title" content="Leetcode-DailyCode"/>
+<meta name="twitter:description" content="2021-01-19"/>
 
   
   
@@ -173,22 +177,31 @@
 <article class="post-single">
   <header class="post-title">
     <p>
-      <time>Dec 23, 2021</time>
+      <time>Oct 14, 2021</time>
       
       <span>zach zhou</span>
       
     </p>
-    <h1>Dapr学习笔记</h1>
+    <h1>Leetcode-DailyCode</h1>
   </header>
-  <section class="post-content"><h1 id="dapr学习笔记">Dapr学习笔记</h1>
-<p>首先将从dapr的整体架构入手，再逐个模块进行深入源码的分析，一起深入Runtime的世界！</p>
+  <section class="post-content"><h2 id="删除排序链表中的重复元素httpsleetcode-cncomproblemsremove-duplicates-from-sorted-list-ii"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/">删除排序链表中的重复元素</a></h2>
+<p><a href="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg">https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg</a></p>
+<blockquote>
+<p>存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现 的数字</p>
+</blockquote>
+<p>链表删除元素，一定是需要记录指针的<code>next</code>和<code>next.next</code>或双指针，通过改变<code>next</code>指针来完成删除操作。在遍历链表的循环内部还需要一个for循环，来跳过重复的元素，示例如下：</p>
+<blockquote>
+<p>1 &ndash;&gt; 2 &ndash;&gt; 3 &ndash;&gt; 3 &ndash;&gt; 4 &ndash;&gt; 4 &ndash;&gt; 5</p>
+</blockquote>
 </section>
 
   
   
   <footer class="post-tags">
      
-    <a href="http://zachless.design/tags/runtime">runtime</a>
+    <a href="http://zachless.design/tags/leetcode">leetcode</a>
+     
+    <a href="http://zachless.design/tags/double_pointer">double_pointer</a>
     
   </footer>
   
@@ -198,9 +211,9 @@
   
   <nav class="post-nav">
     
-    <a class="prev" href="http://zachless.design/post/economic-theory/"><span>←</span><span>经济学原理-01</span></a>
+    <a class="prev" href="http://zachless.design/post/leetcode_3/"><span>←</span><span>Leetcode-3 无重复字符最长字串</span></a>
      
-    <a class="next" href="http://zachless.design/post/tinykv/"><span>TinyKV Project-1</span><span>→</span></a>
+    <a class="next" href="http://zachless.design/post/markdown-syntax/"><span>Markdown Syntax Guide</span><span>→</span></a>
     
   </nav>
   

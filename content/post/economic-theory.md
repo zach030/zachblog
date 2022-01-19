@@ -1,6 +1,6 @@
 +++
 author = "zach zhou"
-title = "经济学原理"
+title = "经济学原理-01"
 date = "2022-01-09"
 description = "经济学原理-01"
 tags = [
