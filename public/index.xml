@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ZachBlog</title>
-    <link>http://zachless.design/</link>
+    <link>https://www.bayesfame.xyz/</link>
     <description>Recent content on ZachBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>面向汽车3.0的智能演进</title>
-      <link>http://zachless.design/post/face-to-car3.0/</link>
+      <link>https://www.bayesfame.xyz/post/face-to-car3.0/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/face-to-car3.0/</guid>
+      <guid>https://www.bayesfame.xyz/post/face-to-car3.0/</guid>
       <description> 写在前面：本思维导图整理于观看了李想的演讲视频后，基于ppt及讲话内容的提炼与总结  数字科技的三个重要时代 从电脑到移动互联网再到智能硬件，汽车其实是智能化发展比较滞后的，跳过了第二步，直接进入了智能硬件的时代，但其实（截止到2018年）真正能称得上智能的还只有特斯拉，完整的云服务、账号系统等等。
 智能硬件时代真正的核心是以人为核心，那些安装个wifi模块就吹智能硬件的不过是套个壳。无论什么技术、什么产品都是用来解决问题的，最重要的是能向用户提供价值，帮助解决问题，帮助解决潜在的问题。
 关于电动化的思考  目前中国电动化的技术储备上与世界处于同一起跑线，甚至处于优势。核心的其实是电池电芯的技术，值得注意的是电池的配方是镍钴锰，而中国是不产钴的，而钴金属近年来的价格也水涨船高 充电桩的普及率是当前电动车市场发展的巨大瓶颈，由于中国的楼宇结构与美国的差异，目前中国的充电桩普及率是非常低的，这也极大的影响了新能源车主的使用体验 汽车的产能和投资不是大的问题，但汽车配套的动力电池的投入是数倍于汽车本身的，随着原材料的价格上涨，动力电池的价格也在不断攀升  关于智能化的思考  不止电动化，车作为一个智能化产品，对于消费者来说需要的是可以不断升级、不断更新，有生命力的产品。大家在手机上使用siri的频率很低，因为他对于我们而言就是冰冷的机器，而在汽车里的语音交互是自然而然的，良好的收音设备，可以给予用户及时的反馈，用户可以感受到有生命力、有感情的产品。 未来的汽车是一个智能化的终端平台，就像手机上承载不同的app一样，在汽车的开放平台之上开发者可以构建应用满足用户的需求，共建开放生态 为什么要选择智能化？一个有力的回答是让你体验过后就回不去了，不再需要在复杂路况中一脚油门一脚刹车，可以停车场自动结账，无论冬夏车内恒温，用智能化的服务说话，用消费者的反馈来回应。  关于自动驾驶的思考  目前的自动驾驶大致分为完全由自己掌控、用指令控制汽车、完全无人驾驶，在将来高级辅助驾驶将会成为中高档汽车的标配 L4级别的无人驾驶将会应用在有限场景，例如物流，园区内的公交线路等等，而非面向消费者的零售车 现在中国的交通运输成本极高，理想在与顺丰合作推出的物流车可以将每公里3-5元的成本降到每公里9毛钱，自动驾驶未来最大的价值就是降低交通运输成本并提高体验  关于汽车制造以及2030年的展望  中国拥有全球最好的汽车供应链以及汽车制造的人才储备 纯电动与混合动力将各占据一半的市场 中国将占据全球智能电动车以及自动驾驶50%以上的份额，并且会出现苹果一样的万亿美金企业  </description>
@@ -21,10 +21,10 @@
     
     <item>
       <title>蛤蟆先生去看心理医生--心理学入门书籍</title>
-      <link>http://zachless.design/post/reading-note-how-to-become-interesting/</link>
+      <link>https://www.bayesfame.xyz/post/reading-note-how-to-become-interesting/</link>
       <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/reading-note-how-to-become-interesting/</guid>
+      <guid>https://www.bayesfame.xyz/post/reading-note-how-to-become-interesting/</guid>
       <description>本书的背景是蛤蟆先生萎靡不振，他的朋友们给他找了一个心理医生，约定好每周进行一次心理咨询，在这里将每次咨询的内容做一个整理。
 第一次咨询 咨询师最先问的问题就是：为什么要来心理咨询？是朋友让你来的还是为了自己来的？
 我们需要认清的是：心理咨询是一个自发的过程，咨询者与来访者是合作关系，而非完全依赖咨询者
@@ -64,10 +64,10 @@
     
     <item>
       <title>DailyCode-0119</title>
-      <link>http://zachless.design/post/leetcode_210119/</link>
+      <link>https://www.bayesfame.xyz/post/leetcode_210119/</link>
       <pubDate>Wed, 19 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/leetcode_210119/</guid>
+      <guid>https://www.bayesfame.xyz/post/leetcode_210119/</guid>
       <description>删除排序链表中的重复元素  存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现 的数字
  链表删除元素，一定是需要记录指针的next和next.next或双指针，通过改变next指针来完成删除操作。在遍历链表的循环内部还需要一个for循环，来跳过重复的元素，示例如下：
  1 &amp;ndash;&amp;gt; 2 &amp;ndash;&amp;gt; 3 &amp;ndash;&amp;gt; 3 &amp;ndash;&amp;gt; 4 &amp;ndash;&amp;gt; 4 &amp;ndash;&amp;gt; 5
@@ -79,19 +79,19 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
     
     <item>
       <title>Build KV Engine With Me-01</title>
-      <link>http://zachless.design/post/know-about-octopusdb/</link>
+      <link>https://www.bayesfame.xyz/post/know-about-octopusdb/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/know-about-octopusdb/</guid>
+      <guid>https://www.bayesfame.xyz/post/know-about-octopusdb/</guid>
       <description>什么是KV分离，为什么需要KV分离 如何实现KV分离 KV分离带来的难点 OctopusDB是怎么做的 </description>
     </item>
     
     <item>
       <title>学会表达</title>
-      <link>http://zachless.design/post/how-to-express/</link>
+      <link>https://www.bayesfame.xyz/post/how-to-express/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/how-to-express/</guid>
+      <guid>https://www.bayesfame.xyz/post/how-to-express/</guid>
       <description>How to express 我一直认为无法清楚表达自己的想法是一个弱点。
 我常常就是脑袋里想法很多，但是到要说出来，发表出来的时候就很一时语塞，不知如何组织语言，觉得只言片语无法清楚的阐述内心想法，话一多又觉得扯得太远，偏离核心。
 其实在 2020 年刚开始实习的时候，在 leader 的推荐下阅读了《金字塔理论》，读过的书就是水一样流逝，如今令我记忆深刻的点也只剩下：说话先说结论，分点陈述（这个点也缺少上下文，或许有失偏颇）。这本书值得再读，尤其在正式进去工作之后。
@@ -103,38 +103,38 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
     
     <item>
       <title>经济学原理-01</title>
-      <link>http://zachless.design/post/economic-theory/</link>
+      <link>https://www.bayesfame.xyz/post/economic-theory/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/economic-theory/</guid>
+      <guid>https://www.bayesfame.xyz/post/economic-theory/</guid>
       <description>经济学的三类问题  这三类问题涵盖了由微观到宏观经济学
   人们如何做决策 How People Make Decisions 人们如何相互作用 How People Interact 整体经济如何运行 How the Economy as a Whole Works  人们如何做决策  权衡 tradeoffs  看问题不是单点，多视角权衡   成本 cost  某物的成本是为此放弃的东西，区别于直接的生产成本   边际 margin  细小的变化引起的变化   激励 incentives  人们对激励做出反应    人们如何相互作用  交易 trade  交易使得双方受益   市场 market  市场通常是组织经济的好方式，“invisble hand”   政府 government  政府可以改进市场    整体经济如何运行  生产 production  由生产率衡量，高生产率&amp;ndash;&amp;gt;高生产水平   货币 money 通胀与失业 inflation and unemployment  经济中整体物价水平的上升    </description>
     </item>
     
     <item>
       <title>Dapr学习笔记</title>
-      <link>http://zachless.design/post/dapr/</link>
+      <link>https://www.bayesfame.xyz/post/dapr/</link>
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/dapr/</guid>
+      <guid>https://www.bayesfame.xyz/post/dapr/</guid>
       <description>Dapr学习笔记 首先将从dapr的整体架构入手，再逐个模块进行深入源码的分析，一起深入Runtime的世界！</description>
     </item>
     
     <item>
       <title>TinyKV Project-1</title>
-      <link>http://zachless.design/post/tinykv/</link>
+      <link>https://www.bayesfame.xyz/post/tinykv/</link>
       <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/tinykv/</guid>
+      <guid>https://www.bayesfame.xyz/post/tinykv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>日常-方法论</title>
-      <link>http://zachless.design/post/methodlogy/</link>
+      <link>https://www.bayesfame.xyz/post/methodlogy/</link>
       <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/methodlogy/</guid>
+      <guid>https://www.bayesfame.xyz/post/methodlogy/</guid>
       <description>Less is More.
  由于信息来源众多，市面上也有诸多 Best Practice ，在此记录一下我日常生活中认为有效、将持续践行的一些方法论
 1. 信息源的输入 信息源的统一入口可以分为：
@@ -148,10 +148,10 @@ Cubox：长文本、各平台文章汇总的收藏夹
     
     <item>
       <title>走入分布式系统</title>
-      <link>http://zachless.design/post/distributed_system/</link>
+      <link>https://www.bayesfame.xyz/post/distributed_system/</link>
       <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/distributed_system/</guid>
+      <guid>https://www.bayesfame.xyz/post/distributed_system/</guid>
       <description>对于分布式的认识 大二暑假开始实习，接触到工业级的开发，摆脱了学校里vc6.0的黑框框。 从开始做服务的接口开发，到数据模型的设计，业务架构的设计。接触更多的业务层面的开发，对我而言是一个自顶向下的发展方向，后期也逐步学习了存储、RPC、消息队列等中间件。
 综合考虑业务体量与实际需求，并没有过早涉及到分布式，记得在看MIT 6.824的课程时，老师就曾说过：能不要分布式就不要分布式（:&amp;gt;可能是类似的意思）
 在我的理解里，分布式系统中重要的影响因素有：
@@ -163,10 +163,10 @@ Cubox：长文本、各平台文章汇总的收藏夹
     
     <item>
       <title>Leetcode-3 无重复字符最长字串</title>
-      <link>http://zachless.design/post/leetcode_3/</link>
+      <link>https://www.bayesfame.xyz/post/leetcode_3/</link>
       <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/leetcode_3/</guid>
+      <guid>https://www.bayesfame.xyz/post/leetcode_3/</guid>
       <description>无重复字符最长子串  给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度
  示例
  输入: s = &amp;ldquo;abcabcbb&amp;rdquo; 输出: 3 解释: 因为无重复字符的最长子串是 &amp;ldquo;abc&amp;rdquo;，所以其长度为 3。
@@ -180,46 +180,46 @@ left,right :=0,0 for right &amp;lt; len(str){ // 向右扩大窗口  window[str[
     
     <item>
       <title></title>
-      <link>http://zachless.design/archives/</link>
+      <link>https://www.bayesfame.xyz/archives/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/archives/</guid>
+      <guid>https://www.bayesfame.xyz/archives/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markdown Syntax Guide</title>
-      <link>http://zachless.design/post/markdown-syntax/</link>
+      <link>https://www.bayesfame.xyz/post/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/markdown-syntax/</guid>
+      <guid>https://www.bayesfame.xyz/post/markdown-syntax/</guid>
       <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rich Content</title>
-      <link>http://zachless.design/post/rich-content/</link>
+      <link>https://www.bayesfame.xyz/post/rich-content/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/rich-content/</guid>
+      <guid>https://www.bayesfame.xyz/post/rich-content/</guid>
       <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Math Typesetting</title>
-      <link>http://zachless.design/post/math-typesetting/</link>
+      <link>https://www.bayesfame.xyz/post/math-typesetting/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/math-typesetting/</guid>
+      <guid>https://www.bayesfame.xyz/post/math-typesetting/</guid>
       <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://zachless.design/about/</link>
+      <link>https://www.bayesfame.xyz/about/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/about/</guid>
+      <guid>https://www.bayesfame.xyz/about/</guid>
       <description>Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
 Hugo makes use of a variety of open source projects including:
  https://github.</description>
@@ -227,10 +227,10 @@ Hugo makes use of a variety of open source projects including:
     
     <item>
       <title></title>
-      <link>http://zachless.design/post/internships/</link>
+      <link>https://www.bayesfame.xyz/post/internships/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/internships/</guid>
+      <guid>https://www.bayesfame.xyz/post/internships/</guid>
       <description></description>
     </item>
     

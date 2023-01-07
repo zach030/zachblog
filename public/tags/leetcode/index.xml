@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>leetcode on ZachBlog</title>
-    <link>http://zachless.design/tags/leetcode/</link>
+    <link>https://www.bayesfame.xyz/tags/leetcode/</link>
     <description>Recent content in leetcode on ZachBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DailyCode-0119</title>
-      <link>http://zachless.design/post/leetcode_210119/</link>
+      <link>https://www.bayesfame.xyz/post/leetcode_210119/</link>
       <pubDate>Wed, 19 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/leetcode_210119/</guid>
+      <guid>https://www.bayesfame.xyz/post/leetcode_210119/</guid>
       <description>删除排序链表中的重复元素  存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现 的数字
  链表删除元素，一定是需要记录指针的next和next.next或双指针，通过改变next指针来完成删除操作。在遍历链表的循环内部还需要一个for循环，来跳过重复的元素，示例如下：
  1 &amp;ndash;&amp;gt; 2 &amp;ndash;&amp;gt; 3 &amp;ndash;&amp;gt; 3 &amp;ndash;&amp;gt; 4 &amp;ndash;&amp;gt; 4 &amp;ndash;&amp;gt; 5
@@ -25,10 +25,10 @@ dummy := ListNode{Next:head} // val不重要，重点在将next指针指向head 
     
     <item>
       <title>Leetcode-3 无重复字符最长字串</title>
-      <link>http://zachless.design/post/leetcode_3/</link>
+      <link>https://www.bayesfame.xyz/post/leetcode_3/</link>
       <pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/leetcode_3/</guid>
+      <guid>https://www.bayesfame.xyz/post/leetcode_3/</guid>
       <description>无重复字符最长子串  给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度
  示例
  输入: s = &amp;ldquo;abcabcbb&amp;rdquo; 输出: 3 解释: 因为无重复字符的最长子串是 &amp;ldquo;abc&amp;rdquo;，所以其长度为 3。

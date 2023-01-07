@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>distributed_system on ZachBlog</title>
-    <link>http://zachless.design/tags/distributed_system/</link>
+    <link>https://www.bayesfame.xyz/tags/distributed_system/</link>
     <description>Recent content in distributed_system on ZachBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://zachless.design/tags/distributed_system/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/distributed_system/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>走入分布式系统</title>
-      <link>http://zachless.design/post/distributed_system/</link>
+      <link>https://www.bayesfame.xyz/post/distributed_system/</link>
       <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/distributed_system/</guid>
+      <guid>https://www.bayesfame.xyz/post/distributed_system/</guid>
       <description>对于分布式的认识 大二暑假开始实习，接触到工业级的开发，摆脱了学校里vc6.0的黑框框。 从开始做服务的接口开发，到数据模型的设计，业务架构的设计。接触更多的业务层面的开发，对我而言是一个自顶向下的发展方向，后期也逐步学习了存储、RPC、消息队列等中间件。
 综合考虑业务体量与实际需求，并没有过早涉及到分布式，记得在看MIT 6.824的课程时，老师就曾说过：能不要分布式就不要分布式（:&amp;gt;可能是类似的意思）
 在我的理解里，分布式系统中重要的影响因素有：

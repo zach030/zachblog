@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>index on ZachBlog</title>
-    <link>http://zachless.design/tags/index/</link>
+    <link>https://www.bayesfame.xyz/tags/index/</link>
     <description>Recent content in index on ZachBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
-    <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright><atom:link href="http://zachless.design/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright><atom:link href="https://www.bayesfame.xyz/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
-      <link>http://zachless.design/post/</link>
+      <link>https://www.bayesfame.xyz/post/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://zachless.design/post/</guid>
+      <guid>https://www.bayesfame.xyz/post/</guid>
       <description></description>
     </item>
     
