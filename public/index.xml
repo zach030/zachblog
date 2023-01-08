@@ -7,7 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>database/sql学习笔记</title>
+      <link>https://www.bayesfame.xyz/post/database_sql/</link>
+      <pubDate>Sun, 08 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/database_sql/</guid>
+      <description>golang中的database/sql包提供了非常好的底层抽象设计思想，值得我们深究学习
+包的结构中，driver包内主要定义了数据库驱动的接口，而外层的sql文件是对driver接口的封装和功能集成
+首先看driver文件，核心的是Driver和Conn接口 由于支持多种类型驱动，在外层的sql文件中用了全局的map来维护所有的驱动接口，并且加了读写锁，对外暴露Register函数
+假设某第三方库实现了Driver接口，那么在核心的包内则应通过在init()函数调用sql包的Register函数注册当前实例到其中去 当某用户使用此第三方包时需要显式或隐式的引用此包，确保init函数被执行
+// Driver is the interface that must be implemented by a database  // driver.  //  // Database drivers may implement DriverContext for access  // to contexts and to parse the name only once for a pool of connections,  // instead of once per connection.  type Driver interface { // Open returns a new connection to the database.  // The name is a string in a driver-specific format.</description>
+    </item>
+    
     <item>
       <title>面向汽车3.0的智能演进</title>
       <link>https://www.bayesfame.xyz/post/face-to-car3.0/</link>
