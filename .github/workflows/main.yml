@@ -1,4 +1,4 @@
-name: blog deploy pipline
+name: hugo blog deploy pipline
 on:
     push:
     tags:
