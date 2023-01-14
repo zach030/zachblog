@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>量化交易学习记录</title>
+      <link>https://www.bayesfame.xyz/post/quant-connect-lesson1/</link>
+      <pubDate>Sat, 14 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/quant-connect-lesson1/</guid>
+      <description>Lesson 1 Buy And Hold / Equities # 初始化设置总资本 sets the starting capital for your strategy self.SetCash(25000) # 设置回测的区间范围 self.SetStartDate(2017, 1, 1) self.SetEndDate(2017, 10, 31) 获取资产：self.AddEquity()
+这个方法有两个基本的参数：资产名称和数据解析方式
+self.AddEquity(&amp;#34;SPY&amp;#34;, Resolution.Minute) 这里的Resolution可以选择Minute, Second, Hour, Daily 但并不一定每个资产都有这么多的数据解析方式，需要参考文档
+设置normalization mode，数据的归一化处理方式
+ Raw Adjusted SplitAdjusted TotalReturn  self.spy = self.AddEquity(&amp;#34;SPY&amp;#34;, Resolution.Daily,dataNormalizationMode=DataNormalizationMode.Raw) protfolio：记录所有投资标的收益的dictionary
+ Invested TotalUnrealizedProfit TotalPortfolioValue TotalMarginUsed  # 查看protfolio，通过self.Portfolio[symbol] self.Debug(&amp;#34;Number of IBM Shares: &amp;#34; + str(self.Portfolio[&amp;#34;IBM&amp;#34;].Invested)) 提出一个市场单 marketOrder，后面跟的参数为asset name和shares
+self.MarketOrder(&amp;#34;AAPL&amp;#34;, 200) </description>
+    </item>
+    
     <item>
       <title>写在2023开始之际</title>
       <link>https://www.bayesfame.xyz/post/write_for_2023/</link>

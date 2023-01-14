@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>量化交易学习记录 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="Lesson 1 Buy And Hold / Equities # 初始化设置总资本 sets the starting capital for your strategy self.SetCash(25000) # 设置回测的区间范围 self.SetStartDate(2017, 1, 1) self.SetEndDate(2017, 10, 31) 获取资产：self.AddEquity()
+这个方法有两个基本的参数：资产名称和数据解析方式
+self.AddEquity(&#34;SPY&#34;, Resolution.Minute) 这里的Resolution可以选择Minute, Second, Hour, Daily 但并不一定每个资产都有这么多的数据解析方式，需要参考文档
+设置normalization mode，数据的归一化处理方式
+ Raw Adjusted SplitAdjusted TotalReturn  self.spy = self.AddEquity(&#34;SPY&#34;, Resolution.Daily,dataNormalizationMode=DataNormalizationMode.Raw) protfolio：记录所有投资标的收益的dictionary
+ Invested TotalUnrealizedProfit TotalPortfolioValue TotalMarginUsed  # 查看protfolio，通过self.Portfolio[symbol] self.Debug(&#34;Number of IBM Shares: &#34; &#43; str(self.Portfolio[&#34;IBM&#34;].Invested)) 提出一个市场单 marketOrder，后面跟的参数为asset name和shares
+self.MarketOrder(&#34;AAPL&#34;, 200) " />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="量化交易学习记录" />
+<meta property="og:description" content="Lesson 1 Buy And Hold / Equities" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/quant-connect-lesson1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-14T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="量化交易学习记录">
+<meta itemprop="description" content="Lesson 1 Buy And Hold / Equities"><meta itemprop="datePublished" content="2023-01-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="63">
+<meta itemprop="keywords" content="quant," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="量化交易学习记录"/>
+<meta name="twitter:description" content="Lesson 1 Buy And Hold / Equities"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Jan 14, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>量化交易学习记录</h1>
+  </header>
+  <section class="post-content"><h2 id="lesson-1-buy-and-hold--equities">Lesson 1 Buy And Hold / Equities</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 初始化设置总资本 sets the starting capital for your strategy</span>
+self<span style="color:#f92672">.</span>SetCash(<span style="color:#ae81ff">25000</span>)
+
+<span style="color:#75715e"># 设置回测的区间范围</span>
+self<span style="color:#f92672">.</span>SetStartDate(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+self<span style="color:#f92672">.</span>SetEndDate(<span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">31</span>)
+
+</code></pre></div><p>获取资产：<code>self.AddEquity()</code></p>
+<p>这个方法有两个基本的参数：资产名称和数据解析方式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>AddEquity(<span style="color:#e6db74">&#34;SPY&#34;</span>, Resolution<span style="color:#f92672">.</span>Minute)
+</code></pre></div><p>这里的Resolution可以选择Minute, Second, Hour, Daily
+但并不一定每个资产都有这么多的数据解析方式，需要参考文档</p>
+<p>设置normalization mode，数据的归一化处理方式</p>
+<ul>
+<li>Raw</li>
+<li>Adjusted</li>
+<li>SplitAdjusted</li>
+<li>TotalReturn</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>spy <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>AddEquity(<span style="color:#e6db74">&#34;SPY&#34;</span>, Resolution<span style="color:#f92672">.</span>Daily,dataNormalizationMode<span style="color:#f92672">=</span>DataNormalizationMode<span style="color:#f92672">.</span>Raw)
+</code></pre></div><p>protfolio：记录所有投资标的收益的dictionary</p>
+<ul>
+<li>Invested</li>
+<li>TotalUnrealizedProfit</li>
+<li>TotalPortfolioValue</li>
+<li>TotalMarginUsed</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 查看protfolio，通过self.Portfolio[symbol]</span>
+self<span style="color:#f92672">.</span>Debug(<span style="color:#e6db74">&#34;Number of IBM Shares: &#34;</span> <span style="color:#f92672">+</span> str(self<span style="color:#f92672">.</span>Portfolio[<span style="color:#e6db74">&#34;IBM&#34;</span>]<span style="color:#f92672">.</span>Invested))
+</code></pre></div><p>提出一个市场单 marketOrder，后面跟的参数为asset name和shares</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>MarketOrder(<span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#ae81ff">200</span>)
+</code></pre></div></section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/quant">quant</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/write_for_2023/"><span>写在2023开始之际</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>
