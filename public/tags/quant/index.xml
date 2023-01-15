@@ -7,9 +7,54 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Sat, 14 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/quant/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/quant/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>量化交易学习记录</title>
+      <title>量化交易 Lesson 2 Buy and Hold with a Trailing Stop</title>
+      <link>https://www.bayesfame.xyz/post/quant-lesson2/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/quant-lesson2/</guid>
+      <description>Lesson 2 Buy and Hold with a Trailing Stop 在上一课中学会了PlaceOrder：self.MarketOrder(&amp;quot;AAPL&amp;quot;, 200) 本节中介绍一些StopOrder的方法
+ stop-limit stop-market  StopMarketOrder方法需要指定sell的shares
+# Sell 300 units of IBM at or below 95% of the current close price self.StopMarketOrder(&amp;#34;IBM&amp;#34;, -300, 0.95 * self.Securities[&amp;#34;IBM&amp;#34;].Close) 每个order执行后都会触发event，需要在代码中进行监听
+# 监听函数 def OnOrderEvent(self, orderEvent): pass orderEvent中包含的属性有：Status和OrderID（唯一） Status包括：
+ Submitted：提交 PartiallyFilled：部分成交 Filled：成交 Canceled：取消 Invalid：无效  通过监听event可以得知order的执行状态，通常在执行StopMarketOrder之后一段时间，我们不会立刻进入市场，因此可以通过监听event来得知StopMarketOrder的完成时间来控制下次进入市场的时间
+self.stopMarketTicket = self.StopMarketOrder(&amp;#34;SPY&amp;#34;,-500, 0.9*self.Securities[&amp;#34;SPY&amp;#34;].Close) # stopMarketTicket 中包含orderID属性，可以在event中进行匹配 def OnOrderEvent(self, orderEvent): # 判断订单是否已完成 if orderEvent.Status != OrderStatus.Filled: return # Printing the security fill prices.</description>
+    </item>
+    
+    <item>
+      <title>量化交易 Lesson 3 Setting Up Tactical Asset Allocation</title>
+      <link>https://www.bayesfame.xyz/post/quant-lesson3/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/quant-lesson3/</guid>
+      <description>Lesson 3 Setting Up Tactical Asset Allocation 在本节课程中引入了一些专业的金融概念，首先对这些概念进行理解
+ Tactical Asset Allocation（TAA） 战术性资产配置 https://wiki.mbalib.com/wiki/Tactical_Asset_Allocation  这是一种积极主动的策略，主动根据市场状态对资产配置进行动态调整 特点：
+ 一般建立在分析工具的量化分析结果之上 资产配置主要受某资产客观测度驱使，是以价值为导向的过程  Momentum Percentage Indicator 动量百分比指标 动量可以理解为一段时间内股价涨跌变动的比率，更注重变化的速度感，常视为超买超卖的指标  在QuantConnect中定义一个动量指标： self.MOMP(symbol, period, resolution)
+在初始化时可以设置self.SetWarmUp()，原文定义的作用是： automatically pumps historical data to an indicator 可以理解为，在初始化的时候预热一段时间的数据并计算赋予指标初始值
+通过 MOMP 方法返回的指标有一些实时更新的属性，例如：indicator.Current.Value 可以获取实时的指标数值
+假设初始的资产包括 SPY 和BND，并且都分别定义了MOMP指标，现在需要根据指标对两个资产进行操作
+#1. If SPY has more upward momentum than BND, then we liquidate our holdings in BND and allocate 100% of our equity to SPY if self.</description>
+    </item>
+    
+    <item>
+      <title>量化交易 Lesson 4 Opening Range Breakout</title>
+      <link>https://www.bayesfame.xyz/post/quant-lesson4/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/quant-lesson4/</guid>
+      <description>Lesson 4 Opening Range Breakout Opening Range Breakout 即开盘区间突破，ORB策略 在这里给出策略的分析定义（还不是太懂） https://www.jianshu.com/p/a2d7f12cc471
+大致理解下，基于开盘价做多头止损和空头止损策略
+在这个策略的开始需要：start by consolidating the first 30 minutes of data（合并前30分钟的数据）
+定义Consolidators ：将更小的数据点合并到大的区间（是对连续数据按照时间区间进行离散化？）
+# Receive consolidated data with a timedelta # parameter and OnDataConsolidated event handler # 参数包括：symbol，时间区间，eventHandler函数 self.Consolidate(&amp;#34;SPY&amp;#34;, timedelta(minutes=45), self.OnDataConsolidated) Consolidators 处理的是将小的数据进行聚合，eventHandler函数用来对聚合后的数据进行处理
+Consolidators 返回的bar 分好几个类型，在上述例子中返回的是 TradeBar 类型，包含以下属性：
+ Open High Low Close Volume  在QuantConnect中通过SetHoldings方法即可实现Long or Short，正数则为Long，负数为short QC目前不支持同时做多和做空（对冲）
+# Go 100% short on SPY  if data[&amp;#34;SPY&amp;#34;].Close &amp;lt; self.openingBar.Low: self.</description>
+    </item>
+    
+    <item>
+      <title>量化交易 Lesson 1 Buy And Hold / Equities</title>
       <link>https://www.bayesfame.xyz/post/quant-connect-lesson1/</link>
       <pubDate>Sat, 14 Jan 2023 00:00:00 +0000</pubDate>
       

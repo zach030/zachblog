@@ -1,6 +1,6 @@
 +++
 author = "zach zhou"
-title = "量化交易学习记录"
+title = "量化交易 Lesson 1 Buy And Hold / Equities"
 date = "2023-01-14"
 description = "Lesson 1 Buy And Hold / Equities"
 tags = [
