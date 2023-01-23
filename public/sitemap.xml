@@ -3,15 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.bayesfame.xyz/</loc>
-    <lastmod>2023-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.bayesfame.xyz/tags/book/</loc>
+    <lastmod>2023-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.bayesfame.xyz/tags/note/</loc>
+    <lastmod>2023-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.bayesfame.xyz/post/</loc>
-    <lastmod>2023-01-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.bayesfame.xyz/tags/quant/</loc>
-    <lastmod>2023-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.bayesfame.xyz/tags/</loc>
+    <lastmod>2023-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.bayesfame.xyz/post/reading-note-courage/</loc>
+    <lastmod>2023-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.bayesfame.xyz/tags/quant/</loc>
     <lastmod>2023-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.bayesfame.xyz/post/quant-lesson2/</loc>
@@ -43,9 +52,6 @@
   </url><url>
     <loc>https://www.bayesfame.xyz/post/face-to-car3.0/</loc>
     <lastmod>2022-03-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.bayesfame.xyz/tags/note/</loc>
-    <lastmod>2022-02-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.bayesfame.xyz/post/reading-note-how-to-become-interesting/</loc>
     <lastmod>2022-02-09T00:00:00+00:00</lastmod>
@@ -151,8 +157,6 @@
   </url><url>
     <loc>https://www.bayesfame.xyz/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.bayesfame.xyz/post/internships/</loc>
   </url><url>
     <loc>https://www.bayesfame.xyz/tags/index/</loc>
   </url>
