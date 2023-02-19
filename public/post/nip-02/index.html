@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-02 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-02 联系人列表和昵称 具有 kind 3的特殊事件(意思是“联系人列表”)定义为具有一个 p 标记列表，每个 p 标记对应于所关注的/已知的联系人简介。
+每个标记条目应该包含联系人简介的键，一个可以找到来自该键的事件的中继器 URL (如果不需要，可以设置为空字符串) ，以及该联系人简介的本地昵称(或“ petname”)(也可以设置为空字符串或不提供) ，即，[“p”，&lt; 32-bytes hex key &gt; ，&lt; main relay URL &gt; ，&lt; petname &gt; ]。content可以是任何内容，应该被忽略。
+示例：
+{ &quot;kind&quot;: 3, &quot;tags&quot;: [ [&quot;p&quot;, &quot;91cf9..4e5ca&quot;, &quot;wss://alicerelay.com/&quot;, &quot;alice&quot;], [&quot;p&quot;, &quot;14aeb..8dad4&quot;, &quot;wss://bobrelay.com/nostr&quot;, &quot;bob&quot;], [&quot;p&quot;, &quot;612ae..e610f&quot;, &quot;ws://carolrelay.com/ws&quot;, &quot;carol&quot;] ], &quot;content&quot;: &quot;&quot;, ...other fields 每个新的联系人列表在发送时会覆盖之前的，所以这里是全量的数据。中继器和客户端应该在收到联系人列表后删除过去的。
+用途 联系人备份 如果用户相信一个中继将存储他们的事件足够的时间，他们可以使用这种kind-3事件备份他们的关注者清单和在不同的设备恢复。
+发现联系人和拓展内容 一个客户端可能依赖于 kind-3事件来显示一个被关注的人的名单，根据他正在浏览的个人资料; 根据他可能关注或浏览的其他人的联系人列表来建议关注谁; 或者显示其他上下文中的数据。
+分享中继器 一个客户端可能会发布一个完整的联系人列表，并为每个联系人提供良好的中继服务，这样其他客户端就可以根据需要更新他们的内部中继服务列表，从而增强对审查制度的抵抗力。
+昵称方案 客户端可以使用这些联系人列表中的数据构造从其他人的联系人列表中派生出来的本地“ petname”表。这减轻了对全局人眼可读名称的需求。例如: 用户有一个内部联系人列表：
+[ [&quot;p&quot;, &quot;21df6d143fb96c2ec9d63726bf9edc71&quot;, &quot;&quot;, &quot;erin&quot;] ] 并接收两个联系人列表，其中一个来自21df6d143fb96c2ec9d63726bf9edc71" />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-02" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-02/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-20T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-02">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="95">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-02"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Feb 20, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-02</h1>
+  </header>
+  <section class="post-content"><h1 id="nip-02">NIP-02</h1>
+<h2 id="联系人列表和昵称">联系人列表和昵称</h2>
+<p>具有 kind <code>3</code>的特殊事件(意思是“联系人列表”)定义为具有一个 <code>p</code> 标记列表，每个 <code>p</code> 标记对应于所关注的/已知的联系人简介。</p>
+<p>每个标记条目应该包含联系人简介的键，一个可以找到来自该键的事件的中继器 URL (如果不需要，可以设置为空字符串) ，以及该联系人简介的本地昵称(或“ petname”)(也可以设置为空字符串或不提供) ，即，<code>[“p”，&lt; 32-bytes hex key &gt; ，&lt; main relay URL &gt; ，&lt; petname &gt; ]</code>。<code>content</code>可以是任何内容，应该被忽略。</p>
+<p>示例：</p>
+<pre tabindex="0"><code>{
+  &quot;kind&quot;: 3,
+  &quot;tags&quot;: [
+    [&quot;p&quot;, &quot;91cf9..4e5ca&quot;, &quot;wss://alicerelay.com/&quot;, &quot;alice&quot;],
+    [&quot;p&quot;, &quot;14aeb..8dad4&quot;, &quot;wss://bobrelay.com/nostr&quot;, &quot;bob&quot;],
+    [&quot;p&quot;, &quot;612ae..e610f&quot;, &quot;ws://carolrelay.com/ws&quot;, &quot;carol&quot;]
+  ],
+  &quot;content&quot;: &quot;&quot;,
+  ...other fields
+</code></pre><p>每个新的联系人列表在发送时会覆盖之前的，所以这里是全量的数据。中继器和客户端应该在收到联系人列表后删除过去的。</p>
+<h2 id="用途">用途</h2>
+<h3 id="联系人备份">联系人备份</h3>
+<p>如果用户相信一个中继将存储他们的事件足够的时间，他们可以使用这种<code>kind-3</code>事件备份他们的关注者清单和在不同的设备恢复。</p>
+<h3 id="发现联系人和拓展内容">发现联系人和拓展内容</h3>
+<p>一个客户端可能依赖于 <code>kind-3</code>事件来显示一个被关注的人的名单，根据他正在浏览的个人资料; 根据他可能关注或浏览的其他人的联系人列表来建议关注谁; 或者显示其他上下文中的数据。</p>
+<h3 id="分享中继器">分享中继器</h3>
+<p>一个客户端可能会发布一个完整的联系人列表，并为每个联系人提供良好的中继服务，这样其他客户端就可以根据需要更新他们的内部中继服务列表，从而增强对审查制度的抵抗力。</p>
+<h3 id="昵称方案">昵称方案</h3>
+<p>客户端可以使用这些联系人列表中的数据构造从其他人的联系人列表中派生出来的本地“ petname”表。这减轻了对全局人眼可读名称的需求。例如:
+用户有一个内部联系人列表：</p>
+<pre tabindex="0"><code>[
+  [&quot;p&quot;, &quot;21df6d143fb96c2ec9d63726bf9edc71&quot;, &quot;&quot;, &quot;erin&quot;]
+]
+</code></pre><p>并接收两个联系人列表，其中一个来自<code>21df6d143fb96c2ec9d63726bf9edc71</code></p>
+<pre tabindex="0"><code>[
+  [&quot;p&quot;, &quot;a8bb3d884d5d90b413d9891fe4c4e46d&quot;, &quot;&quot;, &quot;david&quot;]
+]
+</code></pre><p>另一个来自 <code>a8bb3d884d5d90b413d9891fe4c4e46d</code></p>
+<pre tabindex="0"><code>[
+  [&quot;p&quot;, &quot;f57f54057d2a7af0efecc8b0b66f5708&quot;, &quot;&quot;, &quot;frank&quot;]
+]
+</code></pre><p>当用户看到<code>21df6d143fb96c2ec9d63726bf9edc71</code>时，客户端可以显示 <code>erin</code>; 当用户看到 <code>a8bb3d884d5d90b413d9891fe4c4e46d</code>时，客户端可以显示 <code>david.erin</code>; 当用户看到 <code>f57f54057d2a7af0efecc8b0b66f5708</code>时，客户端可以显示 <code>frank.david.erin</code>。</p>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-01/"><span>详解nostr：nip-01</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>

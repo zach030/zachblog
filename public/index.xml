@@ -7,7 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-02</title>
+      <link>https://www.bayesfame.xyz/post/nip-02/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-02/</guid>
+      <description>NIP-02 联系人列表和昵称 具有 kind 3的特殊事件(意思是“联系人列表”)定义为具有一个 p 标记列表，每个 p 标记对应于所关注的/已知的联系人简介。
+每个标记条目应该包含联系人简介的键，一个可以找到来自该键的事件的中继器 URL (如果不需要，可以设置为空字符串) ，以及该联系人简介的本地昵称(或“ petname”)(也可以设置为空字符串或不提供) ，即，[“p”，&amp;lt; 32-bytes hex key &amp;gt; ，&amp;lt; main relay URL &amp;gt; ，&amp;lt; petname &amp;gt; ]。content可以是任何内容，应该被忽略。
+示例：
+{ &amp;quot;kind&amp;quot;: 3, &amp;quot;tags&amp;quot;: [ [&amp;quot;p&amp;quot;, &amp;quot;91cf9..4e5ca&amp;quot;, &amp;quot;wss://alicerelay.com/&amp;quot;, &amp;quot;alice&amp;quot;], [&amp;quot;p&amp;quot;, &amp;quot;14aeb..8dad4&amp;quot;, &amp;quot;wss://bobrelay.com/nostr&amp;quot;, &amp;quot;bob&amp;quot;], [&amp;quot;p&amp;quot;, &amp;quot;612ae..e610f&amp;quot;, &amp;quot;ws://carolrelay.com/ws&amp;quot;, &amp;quot;carol&amp;quot;] ], &amp;quot;content&amp;quot;: &amp;quot;&amp;quot;, ...other fields 每个新的联系人列表在发送时会覆盖之前的，所以这里是全量的数据。中继器和客户端应该在收到联系人列表后删除过去的。
+用途 联系人备份 如果用户相信一个中继将存储他们的事件足够的时间，他们可以使用这种kind-3事件备份他们的关注者清单和在不同的设备恢复。
+发现联系人和拓展内容 一个客户端可能依赖于 kind-3事件来显示一个被关注的人的名单，根据他正在浏览的个人资料; 根据他可能关注或浏览的其他人的联系人列表来建议关注谁; 或者显示其他上下文中的数据。
+分享中继器 一个客户端可能会发布一个完整的联系人列表，并为每个联系人提供良好的中继服务，这样其他客户端就可以根据需要更新他们的内部中继服务列表，从而增强对审查制度的抵抗力。
+昵称方案 客户端可以使用这些联系人列表中的数据构造从其他人的联系人列表中派生出来的本地“ petname”表。这减轻了对全局人眼可读名称的需求。例如: 用户有一个内部联系人列表：
+[ [&amp;quot;p&amp;quot;, &amp;quot;21df6d143fb96c2ec9d63726bf9edc71&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;erin&amp;quot;] ] 并接收两个联系人列表，其中一个来自21df6d143fb96c2ec9d63726bf9edc71</description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-01</title>
       <link>https://www.bayesfame.xyz/post/nip-01/</link>
