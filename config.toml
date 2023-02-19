@@ -1,5 +1,6 @@
 baseURL = "https://www.bayesfame.xyz/"
 # title = "Hugo Themes"
+tocOpen = true
 buildFuture = true
 author = "Steve Francia"
 copyright = "Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved."

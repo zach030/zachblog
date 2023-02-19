@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 24 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-01</title>
+      <link>https://www.bayesfame.xyz/post/nip-01/</link>
+      <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-01/</guid>
+      <description>NIP-01 基本的协议描述 这个 NIP 定义了每个人都应该实现的基本协议。新的 NIP 可能会向这里描述的结构和流添加新的可选(或强制)字段、消息和特性。
+事件和签名 每个用户有公私钥对，签名，公钥，编码是基于 secp256k1 圆锥曲线实现的 event对象类型的定义如下：
+{ &amp;#34;id&amp;#34;: &amp;lt;32-bytes lowercase hex-encoded sha256 of the the serialized event data&amp;gt; &amp;#34;pubkey&amp;#34;: &amp;lt;32-bytes lowercase hex-encoded public key of the event creator&amp;gt;, &amp;#34;created_at&amp;#34;: &amp;lt;unix timestamp in seconds&amp;gt;, &amp;#34;kind&amp;#34;: &amp;lt;integer&amp;gt;, &amp;#34;tags&amp;#34;: [ [&amp;#34;e&amp;#34;, &amp;lt;32-bytes hex of the id of another event&amp;gt;, &amp;lt;recommended relay URL&amp;gt;], [&amp;#34;p&amp;#34;, &amp;lt;32-bytes hex of the key&amp;gt;, &amp;lt;recommended relay URL&amp;gt;], ... // other kinds of tags may be included later  ], &amp;#34;content&amp;#34;: &amp;lt;arbitrary string&amp;gt;, &amp;#34;sig&amp;#34;: &amp;lt;64-bytes signature of the sha256 hash of the serialized event data, which is the same as the &amp;#34;id&amp;#34; field&amp;gt; } 为了获取event中的id，需要对整个event进行序列化并进行sha256编码，序列化的方式是对下面的结构进行utf8格式的json序列化</description>
+    </item>
+    
     <item>
       <title>读书笔记-被讨厌的勇气</title>
       <link>https://www.bayesfame.xyz/post/reading-note-courage/</link>

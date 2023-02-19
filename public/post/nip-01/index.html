@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-01 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-01 基本的协议描述 这个 NIP 定义了每个人都应该实现的基本协议。新的 NIP 可能会向这里描述的结构和流添加新的可选(或强制)字段、消息和特性。
+事件和签名 每个用户有公私钥对，签名，公钥，编码是基于 secp256k1 圆锥曲线实现的 event对象类型的定义如下：
+{ &#34;id&#34;: &lt;32-bytes lowercase hex-encoded sha256 of the the serialized event data&gt; &#34;pubkey&#34;: &lt;32-bytes lowercase hex-encoded public key of the event creator&gt;, &#34;created_at&#34;: &lt;unix timestamp in seconds&gt;, &#34;kind&#34;: &lt;integer&gt;, &#34;tags&#34;: [ [&#34;e&#34;, &lt;32-bytes hex of the id of another event&gt;, &lt;recommended relay URL&gt;], [&#34;p&#34;, &lt;32-bytes hex of the key&gt;, &lt;recommended relay URL&gt;], ... // other kinds of tags may be included later  ], &#34;content&#34;: &lt;arbitrary string&gt;, &#34;sig&#34;: &lt;64-bytes signature of the sha256 hash of the serialized event data, which is the same as the &#34;id&#34; field&gt; } 为了获取event中的id，需要对整个event进行序列化并进行sha256编码，序列化的方式是对下面的结构进行utf8格式的json序列化" />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-01" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-01/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-19T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-01">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="320">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-01"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Feb 19, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-01</h1>
+  </header>
+  <section class="post-content"><h1 id="nip-01">NIP-01</h1>
+<h2 id="基本的协议描述">基本的协议描述</h2>
+<p>这个 NIP 定义了每个人都应该实现的基本协议。新的 NIP 可能会向这里描述的结构和流添加新的可选(或强制)字段、消息和特性。</p>
+<h3 id="事件和签名">事件和签名</h3>
+<p>每个用户有公私钥对，签名，公钥，编码是基于 secp256k1 圆锥曲线实现的
+event对象类型的定义如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#ae81ff">32</span><span style="color:#960050;background-color:#1e0010">-bytes</span> <span style="color:#960050;background-color:#1e0010">lowercase</span> <span style="color:#960050;background-color:#1e0010">hex-encoded</span> <span style="color:#960050;background-color:#1e0010">sha</span><span style="color:#ae81ff">256</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">serialized</span> <span style="color:#960050;background-color:#1e0010">event</span> <span style="color:#960050;background-color:#1e0010">data&gt;</span>
+  <span style="color:#e6db74">&#34;pubkey&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#ae81ff">32</span><span style="color:#960050;background-color:#1e0010">-bytes</span> <span style="color:#960050;background-color:#1e0010">lowercase</span> <span style="color:#960050;background-color:#1e0010">hex-encoded</span> <span style="color:#960050;background-color:#1e0010">public</span> <span style="color:#960050;background-color:#1e0010">key</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">event</span> <span style="color:#960050;background-color:#1e0010">creator&gt;</span>,
+  <span style="color:#f92672">&#34;created_at&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;unix</span> <span style="color:#960050;background-color:#1e0010">timestamp</span> <span style="color:#960050;background-color:#1e0010">in</span> <span style="color:#960050;background-color:#1e0010">seconds&gt;</span>,
+  <span style="color:#f92672">&#34;kind&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;integer&gt;</span>,
+  <span style="color:#f92672">&#34;tags&#34;</span>: [
+    [<span style="color:#e6db74">&#34;e&#34;</span>, <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#ae81ff">32</span><span style="color:#960050;background-color:#1e0010">-bytes</span> <span style="color:#960050;background-color:#1e0010">hex</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">id</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">another</span> <span style="color:#960050;background-color:#1e0010">event&gt;</span>, <span style="color:#960050;background-color:#1e0010">&lt;recommended</span> <span style="color:#960050;background-color:#1e0010">relay</span> <span style="color:#960050;background-color:#1e0010">URL&gt;</span>],
+    [<span style="color:#e6db74">&#34;p&#34;</span>, <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#ae81ff">32</span><span style="color:#960050;background-color:#1e0010">-bytes</span> <span style="color:#960050;background-color:#1e0010">hex</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">key&gt;</span>, <span style="color:#960050;background-color:#1e0010">&lt;recommended</span> <span style="color:#960050;background-color:#1e0010">relay</span> <span style="color:#960050;background-color:#1e0010">URL&gt;</span>],
+    <span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#75715e">// other kinds of tags may be included later
+</span><span style="color:#75715e"></span>  ],
+  <span style="color:#f92672">&#34;content&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;arbitrary</span> <span style="color:#960050;background-color:#1e0010">string&gt;</span>,
+  <span style="color:#f92672">&#34;sig&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#ae81ff">64</span><span style="color:#960050;background-color:#1e0010">-bytes</span> <span style="color:#960050;background-color:#1e0010">signature</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">sha</span><span style="color:#ae81ff">256</span> <span style="color:#960050;background-color:#1e0010">hash</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">serialized</span> <span style="color:#960050;background-color:#1e0010">event</span> <span style="color:#960050;background-color:#1e0010">data</span>, <span style="color:#960050;background-color:#1e0010">which</span> <span style="color:#960050;background-color:#1e0010">is</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">same</span> <span style="color:#960050;background-color:#1e0010">as</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#f92672">&#34;id&#34;</span> <span style="color:#960050;background-color:#1e0010">field&gt;</span>
+}
+</code></pre></div><p>为了获取event中的id，需要对整个event进行序列化并进行sha256编码，序列化的方式是对下面的结构进行utf8格式的json序列化</p>
+<pre tabindex="0"><code>[
+  0,
+  &lt;pubkey, as a (lowercase) hex string&gt;,
+  &lt;created_at, as a number&gt;,
+  &lt;kind, as a number&gt;,
+  &lt;tags, as an array of arrays of non-null strings&gt;,
+  &lt;content, as a string&gt;
+]
+</code></pre><h2 id="客户端与中继器之间的通信">客户端与中继器之间的通信</h2>
+<p>relay通过公开一个websocket供客户端连接</p>
+<h3 id="从客户端到中继器发送事件和建立订阅关系">从客户端到中继器：发送事件和建立订阅关系</h3>
+<p>客户端可以发送三种类型的消息，都是按照下面样式的json格式数组：</p>
+<ul>
+<li><code>[&quot;EVENT&quot;, &lt;event JSON as defined above&gt;]</code> 用来发布event</li>
+<li><code>[&quot;REQ&quot;, &lt;subscription_id&gt;, &lt;filters JSON&gt;...]</code> 用来请求获得订阅的更新</li>
+<li><code>[&quot;CLOSE&quot;, &lt;subscription_id&gt;]</code> 用于停止之前的订阅</li>
+</ul>
+<p><code>&lt;subscription_id&gt;</code> 是用来表示订阅的唯一字符串
+<code>&lt;filters&gt;</code> 是一个用来决定哪些事件可以被发送进订阅的json对象，定义结构如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;ids&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;a</span> <span style="color:#960050;background-color:#1e0010">list</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">event</span> <span style="color:#960050;background-color:#1e0010">ids</span> <span style="color:#960050;background-color:#1e0010">or</span> <span style="color:#960050;background-color:#1e0010">prefixes&gt;</span>,
+  <span style="color:#f92672">&#34;authors&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;a</span> <span style="color:#960050;background-color:#1e0010">list</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">pubkeys</span> <span style="color:#960050;background-color:#1e0010">or</span> <span style="color:#960050;background-color:#1e0010">prefixes</span>, <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">pubkey</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">an</span> <span style="color:#960050;background-color:#1e0010">event</span> <span style="color:#960050;background-color:#1e0010">must</span> <span style="color:#960050;background-color:#1e0010">be</span> <span style="color:#960050;background-color:#1e0010">one</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">these&gt;,</span>
+  <span style="color:#f92672">&#34;kinds&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;a</span> <span style="color:#960050;background-color:#1e0010">list</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">a</span> <span style="color:#960050;background-color:#1e0010">kind</span> <span style="color:#960050;background-color:#1e0010">numbers&gt;</span>,
+  <span style="color:#f92672">&#34;#e&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;a</span> <span style="color:#960050;background-color:#1e0010">list</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">event</span> <span style="color:#960050;background-color:#1e0010">ids</span> <span style="color:#960050;background-color:#1e0010">that</span> <span style="color:#960050;background-color:#1e0010">are</span> <span style="color:#960050;background-color:#1e0010">referenced</span> <span style="color:#960050;background-color:#1e0010">in</span> <span style="color:#960050;background-color:#1e0010">an</span> <span style="color:#e6db74">&#34;e&#34;</span> <span style="color:#960050;background-color:#1e0010">tag&gt;</span>,
+  <span style="color:#f92672">&#34;#p&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;a</span> <span style="color:#960050;background-color:#1e0010">list</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">pubkeys</span> <span style="color:#960050;background-color:#1e0010">that</span> <span style="color:#960050;background-color:#1e0010">are</span> <span style="color:#960050;background-color:#1e0010">referenced</span> <span style="color:#960050;background-color:#1e0010">in</span> <span style="color:#960050;background-color:#1e0010">a</span> <span style="color:#e6db74">&#34;p&#34;</span> <span style="color:#960050;background-color:#1e0010">tag&gt;</span>,
+  <span style="color:#f92672">&#34;since&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;an</span> <span style="color:#960050;background-color:#1e0010">integer</span> <span style="color:#960050;background-color:#1e0010">unix</span> <span style="color:#960050;background-color:#1e0010">timestamp</span>, <span style="color:#960050;background-color:#1e0010">events</span> <span style="color:#960050;background-color:#1e0010">must</span> <span style="color:#960050;background-color:#1e0010">be</span> <span style="color:#960050;background-color:#1e0010">newer</span> <span style="color:#960050;background-color:#1e0010">than</span> <span style="color:#960050;background-color:#1e0010">this</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">pass&gt;,</span>
+  <span style="color:#f92672">&#34;until&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;an</span> <span style="color:#960050;background-color:#1e0010">integer</span> <span style="color:#960050;background-color:#1e0010">unix</span> <span style="color:#960050;background-color:#1e0010">timestamp</span>, <span style="color:#960050;background-color:#1e0010">events</span> <span style="color:#960050;background-color:#1e0010">must</span> <span style="color:#960050;background-color:#1e0010">be</span> <span style="color:#960050;background-color:#1e0010">older</span> <span style="color:#960050;background-color:#1e0010">than</span> <span style="color:#960050;background-color:#1e0010">this</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">pass&gt;,</span>
+  <span style="color:#f92672">&#34;limit&#34;</span>: <span style="color:#960050;background-color:#1e0010">&lt;maximum</span> <span style="color:#960050;background-color:#1e0010">number</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">events</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">be</span> <span style="color:#960050;background-color:#1e0010">returned</span> <span style="color:#960050;background-color:#1e0010">in</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">initial</span> <span style="color:#960050;background-color:#1e0010">query&gt;</span>
+}
+</code></pre></div><p>当relay收到<code>REQ</code>消息后需要查询本地数据库，并将满足filter要求的事件返回，将filter记录下来，所有后续的事件都将发送到这个websocket连接中，直到连接关闭。发送<code>CLOSE</code>事件时需要指定相同的<code>&lt;subscription_id&gt;</code> 或者使用同一个<code>&lt;subscription_id&gt;</code> 发送新的<code>REQ</code>事件，这样就可以覆盖之前的订阅。</p>
+<p>包含列表的filter属性(比如 id、 kind 或 # e)是具有一个或多个值的 JSON 数组。数组的至少一个值必须与事件中的相关字段匹配，才能将条件本身视为匹配。对于 kind 等标量事件属性，来自事件的属性必须包含在筛选器列表中。对于 # e 等标记属性(其中一个事件可能有多个值) ，事件和筛选条件值必须至少有一个共同的项。</p>
+<p><code>ids</code> 和 <code>authors</code> 列表内是小写的十六进制字符串，可以是精确匹配的64位字符，也可以是事件值的前缀，前缀匹配是指筛选器字符串是事件值的精确字符串前缀。前缀的使用允许在查询大量值时使用更紧凑的过滤器，并且可以为客户机提供一些隐私，这些客户机可能不希望透露它们正在搜索的确切作者或事件。
+ 
+指定的筛选器的所有条件必须匹配一个事件才能通过筛选器，也就是说，多个条件被解释为 <code>&amp;&amp;</code>条件。</p>
+<p>一个<code>REQ</code>消息可能包含多个过滤器，在这种情况下，满足任何一个筛选器条件的事件都可以被返回，多个过滤器可以解释为<code>||</code>条件。</p>
+<p>过滤器的<code>limit</code>属性仅对初始的查询生效，并可以在后续的查询中忽略。当 <code>limit: n</code> 存在时，假定初始查询中返回的事件将是最新的 <code>n</code> 个事件。返回的事件少于指定的限制是安全的，但预计中继器不会返回比请求多得多的事件，这样客户端就不会不必要地被数据淹没。</p>
+<h3 id="从中继器到客户端发送事件和通知">从中继器到客户端：发送事件和通知</h3>
+<p>从中继器向客户端可以发送两种类型的消息：</p>
+<ul>
+<li>
+<ul>
+<li><code>[&quot;EVENT&quot;, &lt;subscription_id&gt;, &lt;event JSON as defined above&gt;]</code> 用于发送客户端请求的事件</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>[&quot;NOTICE&quot;, &lt;message&gt;]</code>用来向客户端发送人眼可读的错误信息</li>
+</ul>
+</li>
+</ul>
+<p>NIP没有对<code>NOTICE</code>消息如何发送和处理做规定</p>
+<p>发送<code>EVENT</code>消息时，必须携带<code>subscription_id</code>参数和对应的订阅关系绑定，也就是上面提到的客户端主动发起的<code>REQ</code>消息</p>
+<h2 id="基础的事件类型">基础的事件类型</h2>
+<ul>
+<li><code>0</code>：<code>set_metadata</code>，事件中的content内容为json结构：<code>{name: &lt;username&gt;, about: &lt;string&gt;, picture: &lt;url, string&gt;}</code></li>
+<li><code>1</code>：<code>text_note</code>，内容被设置为注释的文本内容(用户想说的任何内容)。非明文注释应改为使用 NIP-16中描述的类型1000-10000</li>
+<li><code>2</code>：<code>recommend_server</code>：内容被设置为事件创建者想要向其关注者推荐的中继的 URL (例如，<code>wss://somerelay.com</code>)。</li>
+</ul>
+<p>中继器可以选择以不同的方式处理不同的消息类型，它可以选择默认的方式来处理它不知道的类型，也可以不选择默认的方式。</p>
+<h2 id="其他备注">其他备注</h2>
+<ul>
+<li>客户端不应该向每个中继打开多个 websocket。一个频道可以支持无限数量的订阅，所以客户端应该这样做。</li>
+<li><code>tag</code>数组可以将标记标识符存储为每个子数组的第一个元素，随后再加上任意信息(始终作为字符串)。NIP 定义了<code>“p”</code>ーー意味着<code>“pubkey”</code>，它指向事件中提到的某个人的 pubkey。<code>“e”</code>意味着<code> event</code>，它指向这个事件正在引用、答复或以某种方式提到的事件的 id。</li>
+<li>出现在<code>“e”</code>和<code>“p”</code>标签上的<code>“&lt;recommended relay URL&gt;”</code>项是一个可选的(可以设置为<code>“”</code>)中继器的 URL，客户端可以尝试连接这个中继器，从带标记的配置文件中获取带标记的事件或其他事件。它可能会被忽略，但它的存在是为了增加审查阻力，使中继地址在客户端之间的传播更加无缝。</li>
+</ul>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/reading-note-courage/"><span>读书笔记-被讨厌的勇气</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>
