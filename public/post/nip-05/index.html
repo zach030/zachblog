@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-05 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-05 将Nostr密钥映射到基于 DNS 的互联网标识符 在事件类型 set_metadata中，用户可以设置一个互联网标识符（像邮箱一样的地址）作为nip05的值
+尽管这里指向互联网标识符的链接非常自由，但NIP-05设定&lt;local-part&gt;部分被限制在字符a-z0-9-_.中
+客户端会将标识符分为&lt;local-part&gt; 和 &lt;domain&gt;两部分，并且使用这些值去构造一个GET请求，目标地址为：https://&lt;domain&gt;/.well-known/nostr.json?name=&lt;local-part&gt;
+请求的响应值应该是带有names键的json对象，names键应该是一个从用户名到16进制字符串的映射，如果names中对应的公钥和set_metadata事件中的公钥一致，那么客户端会认为给定的公钥确实可以由其标识符引用
+示例 客户端接收到如下格式的事件：
+{ &quot;pubkey&quot;: &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot;, &quot;kind&quot;: 0, &quot;content&quot;: &quot;{\&quot;name\&quot;: \&quot;bob\&quot;, \&quot;nip05\&quot;: \&quot;bob@example.com\&quot;}&quot; ... } 客户端将会向https://example.com/.well-known/nostr.json?name=bob 发送GET请求，并且收到的响应值结果应该是：
+{ &quot;names&quot;: { &quot;bob&quot;: &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot; } } 或者是带有可选的relays属性：
+{ &quot;names&quot;: { &quot;bob&quot;: &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot; }, &quot;relays&quot;: { &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot;: [ &quot;wss://relay.example.com&quot;, &quot;wss://relay2.example.com&quot; ] } } 通过NIP-05标识符找到用户 客户端可以实现从互联网标识符中查找用户的公钥，流程与上面一样，但是相反: 首先客户端获取已知的 URL，然后从那里获取用户的公钥，然后它尝试为该用户获取类型为0的事件，并检查它是否有一个匹配的“ nip05”。
+备注 客户端必须始终遵循公钥，而不是 NIP-05地址 例如，在发现bob@bob.com有公钥abc...def后，用户点击按钮进行关注，客户端必须保持对abc...def的追踪而不是bob@bob.com。如果出于任何原因，地址https://bob.com/.well-known/nostr.json?name=bob在未来的某个时刻所对应的公钥变为1d2...e3f，客户端不应该在用户的关注列表中替换公钥abc...def（但是应该停止展示bob@bob.com，因为它变成了无效的nip05属性）
+公钥必须是16进制格式 公钥必须以十六进制格式返回。NIP-19 npub 格式的密钥只能用于在客户端 UI 中显示，而不能在此 NIP 中显示。
+支持用户搜索 客户端应该允许用户去搜索他人的主页，如果客户端有一个搜索框，用户可能会输入bob@example.com ，并且客户端会识别并发送请求获取他的公钥返回给用户" />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-05" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-05/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-24T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-05">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="126">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-05"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Feb 24, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-05</h1>
+  </header>
+  <section class="post-content"><h2 id="nip-05">NIP-05</h2>
+<h3 id="将nostr密钥映射到基于-dns-的互联网标识符">将Nostr密钥映射到基于 DNS 的互联网标识符</h3>
+<p>在事件类型 <code>set_metadata</code>中，用户可以设置一个互联网标识符（像邮箱一样的地址）作为<code>nip05</code>的值</p>
+<p>尽管这里指向互联网标识符的链接非常自由，但<code>NIP-05</code>设定<code>&lt;local-part&gt;</code>部分被限制在字符<code>a-z0-9-_.</code>中</p>
+<p>客户端会将标识符分为<code>&lt;local-part&gt;</code> 和 <code>&lt;domain&gt;</code>两部分，并且使用这些值去构造一个GET请求，目标地址为：<code>https://&lt;domain&gt;/.well-known/nostr.json?name=&lt;local-part&gt;</code></p>
+<p>请求的响应值应该是带有<code>names</code>键的json对象，<code>names</code>键应该是一个从用户名到16进制字符串的映射，如果<code>names</code>中对应的公钥和<code>set_metadata</code>事件中的公钥一致，那么客户端会认为给定的公钥确实可以由其标识符引用</p>
+<h4 id="示例">示例</h4>
+<p>客户端接收到如下格式的事件：</p>
+<pre tabindex="0"><code>{
+  &quot;pubkey&quot;: &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot;,
+  &quot;kind&quot;: 0,
+  &quot;content&quot;: &quot;{\&quot;name\&quot;: \&quot;bob\&quot;, \&quot;nip05\&quot;: \&quot;bob@example.com\&quot;}&quot;
+  ...
+}
+</code></pre><p>客户端将会向<code>https://example.com/.well-known/nostr.json?name=bob</code> 发送GET请求，并且收到的响应值结果应该是：</p>
+<pre tabindex="0"><code>{
+  &quot;names&quot;: {
+    &quot;bob&quot;: &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot;
+  }
+}
+</code></pre><p>或者是带有可选的<code>relays</code>属性：</p>
+<pre tabindex="0"><code>{
+  &quot;names&quot;: {
+    &quot;bob&quot;: &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot;
+  },
+  &quot;relays&quot;: {
+    &quot;b0635d6a9851d3aed0cd6c495b282167acf761729078d975fc341b22650b07b9&quot;: [ &quot;wss://relay.example.com&quot;, &quot;wss://relay2.example.com&quot; ]
+  }
+}
+</code></pre><h3 id="通过nip-05标识符找到用户">通过NIP-05标识符找到用户</h3>
+<p>客户端可以实现从互联网标识符中查找用户的公钥，流程与上面一样，但是相反:
+首先客户端获取已知的 URL，然后从那里获取用户的公钥，然后它尝试为该用户获取类型为0的事件，并检查它是否有一个匹配的“ nip05”。</p>
+<h3 id="备注">备注</h3>
+<h4 id="客户端必须始终遵循公钥而不是-nip-05地址">客户端必须始终遵循公钥，而不是 NIP-05地址</h4>
+<p>例如，在发现<code>bob@bob.com</code>有公钥<code>abc...def</code>后，用户点击按钮进行关注，客户端必须保持对<code>abc...def</code>的追踪而不是<code>bob@bob.com</code>。如果出于任何原因，地址<code>https://bob.com/.well-known/nostr.json?name=bob</code>在未来的某个时刻所对应的公钥变为<code>1d2...e3f</code>，客户端不应该在用户的关注列表中替换公钥<code>abc...def</code>（但是应该停止展示<code>bob@bob.com</code>，因为它变成了无效的<code>nip05</code>属性）</p>
+<h4 id="公钥必须是16进制格式">公钥必须是16进制格式</h4>
+<p>公钥必须以十六进制格式返回。NIP-19 <code>npub </code>格式的密钥只能用于在客户端 UI 中显示，而不能在此
+NIP 中显示。</p>
+<h4 id="支持用户搜索">支持用户搜索</h4>
+<p>客户端应该允许用户去搜索他人的主页，如果客户端有一个搜索框，用户可能会输入<code>bob@example.com</code> ，并且客户端会识别并发送请求获取他的公钥返回给用户</p>
+<h4 id="只展示域名部分作为标识符">只展示域名部分作为标识符</h4>
+<p>客户端可能会将<code>_@domain</code>这样的标识符定为根标识符，并且选择只展示<code>&lt;domain&gt;</code>
+例如，如果bob拥有<code>bob.com</code>，他可能不想要像<code>bob@bob.com</code>的标识符，显得很重复。因此Bob可以使用<code>_@bob.com</code>作为标识符，并且希望nostr客户端可以展示并同等对待为<code>bob.com</code></p>
+<h4 id="为什么按照-well-knownnostrjsonnamelocal-part格式">为什么按照 <code>/.well-known/nostr.json?name=&lt;local-part&gt;</code>格式</h4>
+<p>通过添加<code>&lt;local-part&gt;</code>作为查询的条件而不是URL路径的一部分，可以支持按需生成 JSON 的动态服务器和包含可能包含多个名称的 JSON 文件的静态服务器。</p>
+<h4 id="允许来自javascripts应用的访问">允许来自Javascripts应用的访问</h4>
+<p>JavaScript Nostr 应用程序可能受到浏览器 CORS 策略的限制，这些策略阻止它们访问用户域上的<code>/. well-known/nostr.json</code>。当 CORS 阻止 JS 加载资源时，JS 程序将其视为与不存在的资源相同的网络故障，因此，纯 JS 应用程序不可能告诉用户故障是由 CORS 问题引起的</p>
+<p>对于请求<code>/.well-known/nostr.json</code>文件网络故障的 JS Nostr 应用程序，可能会建议用户检查其服务器的 CORS 策略，例如:</p>
+<pre tabindex="0"><code>$ curl -sI https://example.com/.well-known/nostr.json?name=bob | grep -i ^Access-Control
+Access-Control-Allow-Origin: *
+</code></pre><p>用户应确保他们<code>/.well-known/nostr.json</code> 与 HTTP 头 Access-Control-allow-Origin: * 匹配，以确保它可以由运行在现代浏览器中的 JS 应用程序进行验证。</p>
+<h4 id="安全性约束">安全性约束</h4>
+<p><code>/.well-known/nostr.json</code>必须不返回任何 HTTP 重定向
+任何请求都应该忽略<code>/.well-known/nostr.json</code>的重定向</p>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-04/"><span>详解nostr：nip-04</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>

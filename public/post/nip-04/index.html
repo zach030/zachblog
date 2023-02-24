@@ -23,13 +23,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   
-  <title>详解nostr：nip-03 - ZachBlog</title>
+  <title>详解nostr：nip-04 - ZachBlog</title>
 
   
   
-  <meta name="description" content="NIP-03 OpenTimestamps事件认证 当存在 OTS 时，它应该包含在 ots 键下的现有事件主体中:
-{ &quot;id&quot;: ..., &quot;kind&quot;: ..., ..., ..., &quot;ots&quot;: &lt;base64-encoded OTS file data&gt; } 事件 id 必须用作 OpenTimestamp merkle 树中包含的原始hash散列。
-认证可以由中继器自动提供(OTS 二进制内容附加到接收到的事件中) ，也可以由客户端自己在第一次将事件上传到中继器时提供，并由客户端用来表明事件真的“至少与(OTS 日期)一样古老”。" />
+  <meta name="description" content="NIP-04 加密的私信 事件类型为4的含义是“加密的私信”，它应该有以下特质： content内容：用户将想要发送的内容通过将收件人的公开密钥与发件人的私人密钥相结合而生成的共享密码，基于aes-256-cbc加密算法进行加密，再经过base64编码生成的。这是由 base64编码的初始向量所附加的，就好像它是一个名为“ iv”的查询参数一样。格式如下：&quot;content&quot;: &quot;&lt;encrypted_text&gt;?iv=&lt;initialization_vector&gt;&quot;.
+tags必须包含一个记录可以标识消息的接收方，这样，中继器可以自然地将这一事件转发给他们，格式如下：[&quot;p&quot;, &quot;&lt;pubkey, as a hex string&gt;&quot;]
+tags可能包含在之前对话中的消息，或者是我们明确回复的消息，格式如下：[&quot;e&quot;, &quot;&lt;event_id&gt;&quot;]" />
   <meta name="author" content="zach zhou" />
   
 
@@ -80,23 +80,23 @@
   
   
   
-  <meta property="og:title" content="详解nostr：nip-03" />
+  <meta property="og:title" content="详解nostr：nip-04" />
 <meta property="og:description" content="web3" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-03/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-02-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-02-21T00:00:00+00:00" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-04/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-23T00:00:00+00:00" />
 
 
   
-  <meta itemprop="name" content="详解nostr：nip-03">
-<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-21T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-02-21T00:00:00+00:00" />
-<meta itemprop="wordCount" content="30">
+  <meta itemprop="name" content="详解nostr：nip-04">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="15">
 <meta itemprop="keywords" content="web3," />
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="详解nostr：nip-03"/>
+<meta name="twitter:title" content="详解nostr：nip-04"/>
 <meta name="twitter:description" content="web3"/>
 
   
@@ -175,25 +175,19 @@
 <article class="post-single">
   <header class="post-title">
     <p>
-      <time>Feb 21, 2023</time>
+      <time>Feb 23, 2023</time>
       
       <span>zach zhou</span>
       
     </p>
-    <h1>详解nostr：nip-03</h1>
+    <h1>详解nostr：nip-04</h1>
   </header>
-  <section class="post-content"><h1 id="nip-03">NIP-03</h1>
-<h2 id="opentimestamps事件认证">OpenTimestamps事件认证</h2>
-<p>当存在 OTS 时，它应该包含在 <code>ots</code> 键下的现有事件主体中:</p>
-<pre tabindex="0"><code>{
-  &quot;id&quot;: ...,
-  &quot;kind&quot;: ...,
-  ...,
-  ...,
-  &quot;ots&quot;: &lt;base64-encoded OTS file data&gt;
-}
-</code></pre><p>事件 id 必须用作 OpenTimestamp merkle 树中包含的原始hash散列。</p>
-<p>认证可以由中继器自动提供(OTS 二进制内容附加到接收到的事件中) ，也可以由客户端自己在第一次将事件上传到中继器时提供，并由客户端用来表明事件真的“至少与(OTS 日期)一样古老”。</p>
+  <section class="post-content"><h2 id="nip-04">NIP-04</h2>
+<h3 id="加密的私信">加密的私信</h3>
+<p>事件类型为4的含义是“加密的私信”，它应该有以下特质：
+<code>content</code>内容：用户将想要发送的内容通过将收件人的公开密钥与发件人的私人密钥相结合而生成的共享密码，基于aes-256-cbc加密算法进行加密，再经过base64编码生成的。这是由 base64编码的初始向量所附加的，就好像它是一个名为“ iv”的查询参数一样。格式如下：<code>&quot;content&quot;: &quot;&lt;encrypted_text&gt;?iv=&lt;initialization_vector&gt;&quot;</code>.</p>
+<p><code>tags</code>必须包含一个记录可以标识消息的接收方，这样，中继器可以自然地将这一事件转发给他们，格式如下：<code>[&quot;p&quot;, &quot;&lt;pubkey, as a hex string&gt;&quot;]</code></p>
+<p><code>tags</code>可能包含在之前对话中的消息，或者是我们明确回复的消息，格式如下：<code>[&quot;e&quot;, &quot;&lt;event_id&gt;&quot;]</code></p>
 </section>
 
   
@@ -210,9 +204,9 @@
   
   <nav class="post-nav">
     
-    <a class="prev" href="https://www.bayesfame.xyz/post/nip-04/"><span>←</span><span>详解nostr：nip-04</span></a>
+    <a class="prev" href="https://www.bayesfame.xyz/post/nip-05/"><span>←</span><span>详解nostr：nip-05</span></a>
      
-    <a class="next" href="https://www.bayesfame.xyz/post/nip-02/"><span>详解nostr：nip-02</span><span>→</span></a>
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-03/"><span>详解nostr：nip-03</span><span>→</span></a>
     
   </nav>
   
