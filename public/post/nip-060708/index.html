@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-06 &amp; nip-07 &amp; nip-08 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-06 BIP39是用来生成助记词并将其转换为二进制种子 BIP32HD钱包相关BIP，这里不做拓展
+这是基本的、通用的、单一键的客户端默认值 其他类型的客户机仍然可以为自己的其他目的使用其他派生路径。
+NIP-07 适配浏览器的window.nostr window.nostr可以通过网络浏览器或扩展程序使用，网站或 web 应用程序可以在检查其可用性后使用它。 该对象必须定义以下方法:
+async window.nostr.getPublicKey(): string // returns a public key as hex async window.nostr.signEvent(event: Event): Event // takes an event object, adds `id`, `pubkey` and `sig` and returns it 除上述两项基本功能外，以下功能亦可选择性地实施:
+async window.nostr.getRelays(): { [url: string]: {read: boolean, write: boolean} } // returns a basic map of relay urls to relay policies async window.nostr.nip04.encrypt(pubkey, plaintext): string // returns ciphertext and iv as specified in nip-04 async window." />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-06 &amp; nip-07 &amp; nip-08" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-060708/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-26T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-06 &amp; nip-07 &amp; nip-08">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="107">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-06 &amp; nip-07 &amp; nip-08"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Feb 26, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-06 &amp; nip-07 &amp; nip-08</h1>
+  </header>
+  <section class="post-content"><h1 id="nip-06">NIP-06</h1>
+<p><a href="https://bips.xyz/39">BIP39</a>是用来生成助记词并将其转换为二进制种子
+<a href="https://bips.xyz/32">BIP32</a>HD钱包相关BIP，这里不做拓展</p>
+<p>这是基本的、通用的、单一键的客户端默认值
+其他类型的客户机仍然可以为自己的其他目的使用其他派生路径。</p>
+<h1 id="nip-07">NIP-07</h1>
+<h2 id="适配浏览器的windownostr">适配浏览器的<code>window.nostr</code></h2>
+<p><code>window.nostr</code>可以通过网络浏览器或扩展程序使用，网站或 web 应用程序可以在检查其可用性后使用它。
+该对象必须定义以下方法:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">async</span> window.<span style="color:#a6e22e">nostr</span>.<span style="color:#a6e22e">getPublicKey</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> <span style="color:#75715e">// returns a public key as hex
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> window.<span style="color:#a6e22e">nostr</span>.<span style="color:#a6e22e">signEvent</span>(<span style="color:#a6e22e">event</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Event</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Event</span> <span style="color:#75715e">// takes an event object, adds `id`, `pubkey` and `sig` and returns it
+</span></code></pre></div><p>除上述两项基本功能外，以下功能亦可选择性地实施:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">async</span> window.<span style="color:#a6e22e">nostr</span>.<span style="color:#a6e22e">getRelays</span>()<span style="color:#f92672">:</span> { [<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>]<span style="color:#f92672">:</span> {<span style="color:#a6e22e">read</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span>, <span style="color:#a6e22e">write</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span>} } <span style="color:#75715e">// returns a basic map of relay urls to relay policies
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> window.<span style="color:#a6e22e">nostr</span>.<span style="color:#a6e22e">nip04</span>.<span style="color:#a6e22e">encrypt</span>(<span style="color:#a6e22e">pubkey</span>, <span style="color:#a6e22e">plaintext</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> <span style="color:#75715e">// returns ciphertext and iv as specified in nip-04
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> window.<span style="color:#a6e22e">nostr</span>.<span style="color:#a6e22e">nip04</span>.<span style="color:#a6e22e">decrypt</span>(<span style="color:#a6e22e">pubkey</span>, <span style="color:#a6e22e">ciphertext</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> <span style="color:#75715e">// takes ciphertext and iv as specified in nip-04
+</span></code></pre></div><h1 id="nip-08">NIP-08</h1>
+<h2 id="处理提及">处理“提及“</h2>
+<p>本文档标准化了客户端对<code> text _note</code> 内容中的其他事件和 <code>pubkey</code> 的提及的处理。</p>
+<p>想要允许标记提及的客户端必须显示一个自动完成组件或类似的东西，无论何时用户开始键入一个特殊的键(例如，“@”)或按下某个按钮以包含提及，这些客户端可以想出其他方法来明确区分提及和正常文本。</p>
+<p>一旦确定了提及，例如 pubkey <code>27866e9d854c78ae625b867eefdfa9580434bc3e675be08d2acb526610d96fbe</code>，客户端必须将该 pubkey 添加到<code>.tags</code>带上标签<code>p</code>，然后替换其文本引用(例如在<code>.content</code>中) ，使用符号 <code>#[index]</code>，其中“index”等于标记数组中相关标记的从0开始的索引</p>
+<p>同样的过程也适用于提及事件 ID</p>
+<p>接收 <code>text_note</code> 事件的客户端在处理内容<code>.content</code>中使用<code>#[index]</code>提及的内容时，客户端可以搜索并将tag数组中的内容替换为实际提到的公钥或事件ID</p>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-05/"><span>详解nostr：nip-05</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>

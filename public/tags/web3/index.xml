@@ -7,7 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 24 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/web3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/web3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-06 &amp; nip-07 &amp; nip-08</title>
+      <link>https://www.bayesfame.xyz/post/nip-060708/</link>
+      <pubDate>Sun, 26 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-060708/</guid>
+      <description>NIP-06 BIP39是用来生成助记词并将其转换为二进制种子 BIP32HD钱包相关BIP，这里不做拓展
+这是基本的、通用的、单一键的客户端默认值 其他类型的客户机仍然可以为自己的其他目的使用其他派生路径。
+NIP-07 适配浏览器的window.nostr window.nostr可以通过网络浏览器或扩展程序使用，网站或 web 应用程序可以在检查其可用性后使用它。 该对象必须定义以下方法:
+async window.nostr.getPublicKey(): string // returns a public key as hex async window.nostr.signEvent(event: Event): Event // takes an event object, adds `id`, `pubkey` and `sig` and returns it 除上述两项基本功能外，以下功能亦可选择性地实施:
+async window.nostr.getRelays(): { [url: string]: {read: boolean, write: boolean} } // returns a basic map of relay urls to relay policies async window.nostr.nip04.encrypt(pubkey, plaintext): string // returns ciphertext and iv as specified in nip-04 async window.</description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-05</title>
       <link>https://www.bayesfame.xyz/post/nip-05/</link>
