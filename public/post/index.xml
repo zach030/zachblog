@@ -7,7 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Mon, 27 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-10</title>
+      <link>https://www.bayesfame.xyz/post/nip-10/</link>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-10/</guid>
+      <description>NIP-10 文本事件中的e和p标签 摘要 这个 NIP 描述了如何在文本事件中使用“ e”和“ p”标记，特别是那些对其他文本事件的响应。它帮助客户端将答复线程化到以原始事件为根的树状结构中。
+&amp;quot;e&amp;quot;标签 [&amp;quot;e&amp;quot;, &amp;lt;event-id&amp;gt;, &amp;lt;relay-url&amp;gt;, &amp;lt;marker&amp;gt;]
+ &amp;lt;event-id&amp;gt;是事件被引用的ID &amp;lt;relay-url&amp;gt;是与引用的事件关联的中继器，客户端应该添加一个&amp;lt;relay-url&amp;gt;选项，但是默认应该为&amp;quot;&amp;quot; &amp;lt;marker&amp;gt;是可选项，如果出现应该是&amp;quot;reply&amp;quot;, &amp;quot;root&amp;quot;, or &amp;quot;mention&amp;quot;其中之一  &amp;ldquo;e&amp;quot;标签的内容顺序没有特定关系，被标记为&amp;quot;reply&amp;quot;指的是回复的事件。被标记为&amp;quot;root&amp;quot;的指向的是被回复的根事件。对于最顶层的事件，只应该标记&amp;quot;root&amp;quot;。被标记为&amp;quot;mention&amp;quot;指的是被引用或转发的事件ID。
+直接回复根事件的应该只有一个&amp;quot;e&amp;quot;标签，类型为&amp;quot;root&amp;quot;
+ 这个方案是首选的，因为它允许事件提到其他事件，而不会将它们与 &amp;lt; response-id &amp;gt; 或 &amp;lt; root-id &amp;gt; 混淆。
+ &amp;quot;p&amp;quot;标签 在文本事件中使用的命令包含用于记录所涉及的用户的 pubkey 列表。
+当回复一个文本事件 E 时，回复事件的“ p”标签应该包含 E 的所有“ p”标签以及被回复事件的“ pubkey”。
+示例: 给定一个由 a1创建的带有“ p”标记[ p1，p2，p3]的文本事件，那么回复的“ p”标记应该是[ a1，p1，p2，p3] ，没有特定的顺序。</description>
+    </item>
+    
+    <item>
+      <title>详解nostr：nip-11</title>
+      <link>https://www.bayesfame.xyz/post/nip-11/</link>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-11/</guid>
+      <description>NIP-11 中继器信息文档 中继器可以向客户端提供服务器元数据，以通知它们功能、管理联系人和各种服务器属性。这是通过 HTTP 作为 JSON 文档提供的，在与中继器的 websocket 相同的 URI 上。
+当一个中继器接收到一个 HTTP 请求，其中包含了一个支持 WebSocket 升级的 URI 的 application/nostr+json 的 Accept 头，中继应该返回一个具有以下结构的文档。
+{ &amp;quot;name&amp;quot;: &amp;lt;string identifying relay&amp;gt;, &amp;quot;description&amp;quot;: &amp;lt;string with detailed information&amp;gt;, &amp;quot;pubkey&amp;quot;: &amp;lt;administrative contact pubkey&amp;gt;, &amp;quot;contact&amp;quot;: &amp;lt;administrative alternate contact&amp;gt;, &amp;quot;supported_nips&amp;quot;: &amp;lt;a list of NIP numbers supported by the relay&amp;gt;, &amp;quot;software&amp;quot;: &amp;lt;string identifying relay software URL&amp;gt;, &amp;quot;version&amp;quot;: &amp;lt;string version identifier&amp;gt; } 任何字段都可能被忽略，客户端必须忽略任何他们不理解的额外字段。中继器必须通过发送Access-Control-Allow-Origin, Access-Control-Allow-Headers, 和 Access-Control-Allow-Methods 来接受 CORS 请求
+字段解释 Name 中继器可以选择一个用于客户端软件的名称。这是一个字符串，应该小于30个字符，以避免客户端截断。</description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-09</title>
       <link>https://www.bayesfame.xyz/post/nip-09/</link>

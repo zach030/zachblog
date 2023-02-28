@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-10 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-10 文本事件中的e和p标签 摘要 这个 NIP 描述了如何在文本事件中使用“ e”和“ p”标记，特别是那些对其他文本事件的响应。它帮助客户端将答复线程化到以原始事件为根的树状结构中。
+&quot;e&quot;标签 [&quot;e&quot;, &lt;event-id&gt;, &lt;relay-url&gt;, &lt;marker&gt;]
+ &lt;event-id&gt;是事件被引用的ID &lt;relay-url&gt;是与引用的事件关联的中继器，客户端应该添加一个&lt;relay-url&gt;选项，但是默认应该为&quot;&quot; &lt;marker&gt;是可选项，如果出现应该是&quot;reply&quot;, &quot;root&quot;, or &quot;mention&quot;其中之一  &ldquo;e&quot;标签的内容顺序没有特定关系，被标记为&quot;reply&quot;指的是回复的事件。被标记为&quot;root&quot;的指向的是被回复的根事件。对于最顶层的事件，只应该标记&quot;root&quot;。被标记为&quot;mention&quot;指的是被引用或转发的事件ID。
+直接回复根事件的应该只有一个&quot;e&quot;标签，类型为&quot;root&quot;
+ 这个方案是首选的，因为它允许事件提到其他事件，而不会将它们与 &lt; response-id &gt; 或 &lt; root-id &gt; 混淆。
+ &quot;p&quot;标签 在文本事件中使用的命令包含用于记录所涉及的用户的 pubkey 列表。
+当回复一个文本事件 E 时，回复事件的“ p”标签应该包含 E 的所有“ p”标签以及被回复事件的“ pubkey”。
+示例: 给定一个由 a1创建的带有“ p”标记[ p1，p2，p3]的文本事件，那么回复的“ p”标记应该是[ a1，p1，p2，p3] ，没有特定的顺序。" />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-10" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-10/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-28T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-10">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-02-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="50">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-10"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Feb 28, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-10</h1>
+  </header>
+  <section class="post-content"><h1 id="nip-10">NIP-10</h1>
+<h2 id="文本事件中的e和p标签">文本事件中的<code>e</code>和<code>p</code>标签</h2>
+<h3 id="摘要">摘要</h3>
+<p>这个 NIP 描述了如何在文本事件中使用“ e”和“ p”标记，特别是那些对其他文本事件的响应。它帮助客户端将答复线程化到以原始事件为根的树状结构中。</p>
+<h3 id="e标签"><code>&quot;e&quot;</code>标签</h3>
+<p><code>[&quot;e&quot;, &lt;event-id&gt;, &lt;relay-url&gt;, &lt;marker&gt;]</code></p>
+<ul>
+<li><code>&lt;event-id&gt;</code>是事件被引用的ID</li>
+<li><code>&lt;relay-url&gt;</code>是与引用的事件关联的中继器，客户端应该添加一个<code>&lt;relay-url&gt;</code>选项，但是默认应该为&quot;&quot;</li>
+<li><code>&lt;marker&gt;</code>是可选项，如果出现应该是<code>&quot;reply&quot;</code>, <code>&quot;root&quot;</code>, or <code>&quot;mention&quot;</code>其中之一</li>
+</ul>
+<p>&ldquo;e&quot;标签的内容顺序没有特定关系，被标记为<code>&quot;reply&quot;</code>指的是回复的事件。被标记为<code>&quot;root&quot;</code>的指向的是被回复的根事件。对于最顶层的事件，只应该标记<code>&quot;root&quot;</code>。被标记为<code>&quot;mention&quot;</code>指的是被引用或转发的事件ID。</p>
+<p>直接回复根事件的应该只有一个<code>&quot;e&quot;</code>标签，类型为<code>&quot;root&quot;</code></p>
+<blockquote>
+<p>这个方案是首选的，因为它允许事件提到其他事件，而不会将它们与 &lt; response-id &gt; 或 &lt; root-id &gt; 混淆。</p>
+</blockquote>
+<h3 id="p标签"><code>&quot;p&quot;</code>标签</h3>
+<p>在文本事件中使用的命令包含用于记录所涉及的用户的 pubkey 列表。</p>
+<p>当回复一个文本事件 E 时，回复事件的“ p”标签应该包含 E 的所有“ p”标签以及被回复事件的“ pubkey”。</p>
+<p>示例: 给定一个由 a1创建的带有“ p”标记<code>[ p1，p2，p3]</code>的文本事件，那么回复的“ p”标记应该是<code>[ a1，p1，p2，p3]</code> ，没有特定的顺序。</p>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-11/"><span>详解nostr：nip-11</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>
