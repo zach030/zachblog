@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-12</title>
+      <link>https://www.bayesfame.xyz/post/nip-12/</link>
+      <pubDate>Wed, 01 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-12/</guid>
+      <description>NIP-12 通用的标签查询 中继器应该支持根据标签订阅，NIP-01要求中继器对于查询请求发送带有e 和p标签的响应。此 NIP 允许查询事件中出现的任何单字母标记。
+NIP-01中描述的 &amp;lt;filters&amp;gt; 对象被扩展为包含带有 # 前缀的任意键。任何带有#前缀的都是标签查询，并且必须携带字符串数组。如果事件带有此标签，并且事件中至少有一个标签和查询中的符合，则满足查询条件。标签名就是#后的字母，并且标签值是第二个元素。为了进行标记查询，将忽略后续元素。
+订阅筛选示例 下面提供了一个过滤器示例，该过滤器将类型1的事件与设置为 foo 或 bar 的 r 标记匹配。
+{ &amp;quot;kinds&amp;quot;: [1], &amp;quot;#r&amp;quot;: [&amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;] } 客户端行为 客户端应该使用 support_nips 字段来了解中继是否支持通用标记查询。客户可以向任何中继发送通用标签查询，如果他们准备过滤掉来自不支持此 NIP 的中继的无关响应。
+基本原理 在查询中只保留可用的单字母标记，可以允许应用程序为所有类型的元数据使用标签过滤，这是主要目的，而不用担心它们可能会使得中继器的索引逐渐膨胀。 当然，这也使得中继器变得更轻，如果一些应用程序或用户滥用单字母标签，中继器可以更容易检测出来，因为单字母标签将很难与一些实际上有意义的元数据混淆，一些应用程序真的想附加到事件没有垃圾邮件的意图。
+建议用例 下面提供了通用标记查询的有启发性的示例。本 NIP 不提倡或标准化任何特定标签的使用。
+ 去中心化评论系统: 客户端可以对任意网页进行评论，并通过使用 r (“ reference”，在本例中为 URL)标记和值轻松搜索其他评论。 特定位置的 Posts: 客户端可以使用 g (“ Geohash”)标记将一篇文章与一个物理位置关联起来。客户端可以搜索其附近不同精度的一组地理哈希来查找本地内容。 Hashtag: 客户端可以使用简单的 t (“ hashtag”)标签将事件与一个易于搜索的主题名相关联。由于 Nostr 事件本身不能通过协议进行搜索，因此这为用户驱动的搜索提供了一种机制。  </description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-10</title>
       <link>https://www.bayesfame.xyz/post/nip-10/</link>

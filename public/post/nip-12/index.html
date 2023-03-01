@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-12 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-12 通用的标签查询 中继器应该支持根据标签订阅，NIP-01要求中继器对于查询请求发送带有e 和p标签的响应。此 NIP 允许查询事件中出现的任何单字母标记。
+NIP-01中描述的 &lt;filters&gt; 对象被扩展为包含带有 # 前缀的任意键。任何带有#前缀的都是标签查询，并且必须携带字符串数组。如果事件带有此标签，并且事件中至少有一个标签和查询中的符合，则满足查询条件。标签名就是#后的字母，并且标签值是第二个元素。为了进行标记查询，将忽略后续元素。
+订阅筛选示例 下面提供了一个过滤器示例，该过滤器将类型1的事件与设置为 foo 或 bar 的 r 标记匹配。
+{ &quot;kinds&quot;: [1], &quot;#r&quot;: [&quot;foo&quot;, &quot;bar&quot;] } 客户端行为 客户端应该使用 support_nips 字段来了解中继是否支持通用标记查询。客户可以向任何中继发送通用标签查询，如果他们准备过滤掉来自不支持此 NIP 的中继的无关响应。
+基本原理 在查询中只保留可用的单字母标记，可以允许应用程序为所有类型的元数据使用标签过滤，这是主要目的，而不用担心它们可能会使得中继器的索引逐渐膨胀。 当然，这也使得中继器变得更轻，如果一些应用程序或用户滥用单字母标签，中继器可以更容易检测出来，因为单字母标签将很难与一些实际上有意义的元数据混淆，一些应用程序真的想附加到事件没有垃圾邮件的意图。
+建议用例 下面提供了通用标记查询的有启发性的示例。本 NIP 不提倡或标准化任何特定标签的使用。
+ 去中心化评论系统: 客户端可以对任意网页进行评论，并通过使用 r (“ reference”，在本例中为 URL)标记和值轻松搜索其他评论。 特定位置的 Posts: 客户端可以使用 g (“ Geohash”)标记将一篇文章与一个物理位置关联起来。客户端可以搜索其附近不同精度的一组地理哈希来查找本地内容。 Hashtag: 客户端可以使用简单的 t (“ hashtag”)标签将事件与一个易于搜索的主题名相关联。由于 Nostr 事件本身不能通过协议进行搜索，因此这为用户驱动的搜索提供了一种机制。  " />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-12" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-12/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-01T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-12">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-03-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="58">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-12"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Mar 1, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-12</h1>
+  </header>
+  <section class="post-content"><h1 id="nip-12">NIP-12</h1>
+<h2 id="通用的标签查询">通用的标签查询</h2>
+<p>中继器应该支持根据标签订阅，NIP-01要求中继器对于查询请求发送带有<code>e</code> 和<code>p</code>标签的响应。此 NIP 允许查询事件中出现的任何单字母标记。</p>
+<p>NIP-01中描述的 <code>&lt;filters&gt;</code> 对象被扩展为包含带有 <code>#</code> 前缀的任意键。任何带有<code>#</code>前缀的都是标签查询，并且必须携带字符串数组。如果事件带有此标签，并且事件中至少有一个标签和查询中的符合，则满足查询条件。标签名就是<code>#</code>后的字母，并且标签值是第二个元素。为了进行标记查询，将忽略后续元素。</p>
+<h2 id="订阅筛选示例">订阅筛选示例</h2>
+<p>下面提供了一个过滤器示例，该过滤器将类型1的事件与设置为 foo 或 bar 的 r 标记匹配。</p>
+<pre tabindex="0"><code>{
+  &quot;kinds&quot;: [1],
+  &quot;#r&quot;: [&quot;foo&quot;, &quot;bar&quot;]
+}
+</code></pre><h2 id="客户端行为">客户端行为</h2>
+<p>客户端应该使用 <code>support_nips</code> 字段来了解中继是否支持通用标记查询。客户可以向任何中继发送通用标签查询，如果他们准备过滤掉来自不支持此 NIP 的中继的无关响应。</p>
+<h2 id="基本原理">基本原理</h2>
+<p>在查询中只保留可用的单字母标记，可以允许应用程序为所有类型的元数据使用标签过滤，这是主要目的，而不用担心它们可能会使得中继器的索引逐渐膨胀。
+当然，这也使得中继器变得更轻，如果一些应用程序或用户滥用单字母标签，中继器可以更容易检测出来，因为单字母标签将很难与一些实际上有意义的元数据混淆，一些应用程序真的想附加到事件没有垃圾邮件的意图。</p>
+<h2 id="建议用例">建议用例</h2>
+<p>下面提供了通用标记查询的有启发性的示例。本 NIP 不提倡或标准化任何特定标签的使用。</p>
+<ul>
+<li>去中心化评论系统: 客户端可以对任意网页进行评论，并通过使用 r (“ reference”，在本例中为 URL)标记和值轻松搜索其他评论。</li>
+<li>特定位置的 Posts: 客户端可以使用 g (“ Geohash”)标记将一篇文章与一个物理位置关联起来。客户端可以搜索其附近不同精度的一组地理哈希来查找本地内容。</li>
+<li>Hashtag: 客户端可以使用简单的 t (“ hashtag”)标签将事件与一个易于搜索的主题名相关联。由于 Nostr 事件本身不能通过协议进行搜索，因此这为用户驱动的搜索提供了一种机制。</li>
+</ul>
+</section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-10/"><span>详解nostr：nip-10</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>
