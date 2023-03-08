@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ch">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  
+  <title>详解nostr：nip-13 - ZachBlog</title>
+
+  
+  
+  <meta name="description" content="NIP-13 工作量证明 本nip定义了一种为nostr笔记生成和验证工作量证明的方法。工作证明(Proof Work，PoW)是将计算工作证明添加到笔记中的一种方法。这是一个承载者证明，所有中继器和客户端都可以通过少量代码进行普遍验证。这个证据可以作为阻止垃圾邮件的一种手段。
+挖矿 如果要为NIP-01的笔记生成POW，需要加上nonce tag {&quot;content&quot;: &quot;It&#39;s just me mining my own business&quot;, &quot;tags&quot;: [[&quot;nonce&quot;, &quot;1&quot;, &quot;20&quot;]]} 当进行挖矿时，nonce标记的第二个条目会被更改，并且id会被重新计算，如果id包含了足够的前导零，那么这个笔记就被挖矿成功，建议在此过程中同步更新created_at
+nonce中的第三个对象是挖矿的难度。这使得客户端可以防止大量垃圾邮件发送者针对较低难度的POW证明，例如你要求回复帖子的内容需要目标前导零个数为30，即使回复拥有40bits的难度，你也可以拒绝。没有一个确定的目标难度，你不能拒绝它。
+挖矿示例的帖子 { &#34;id&#34;: &#34;000006d8c378af1779d2feebc7603a125d99eca0ccf1085959b307f64e5dd358&#34;, &#34;pubkey&#34;: &#34;a48380f4cfcc1ad5378294fcac36439770f9c878dd880ffa94bb74ea54a6f243&#34;, &#34;created_at&#34;: 1651794653, &#34;kind&#34;: 1, &#34;tags&#34;: [ [ &#34;nonce&#34;, &#34;776797&#34;, &#34;20&#34; ] ], &#34;content&#34;: &#34;It&#39;s just me mining my own business&#34;, &#34;sig&#34;: &#34;284622fc0a3f4f1303455d5175f7ba962a3300d136085b9566801bc2e0699de0c7e31e44c81fb40ad9049173742e904713c3594a1da0fc5d2382a25c11aba977&#34; } " />
+  <meta name="author" content="zach zhou" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/app.min.css" />
+
+  
+  <link rel="preload stylesheet" as="style" href="https://www.bayesfame.xyz/an-old-hope.min.css" />
+  <script
+    defer
+    src="https://www.bayesfame.xyz/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/theme.png" />
+
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/github.svg" />
+  
+  <link rel="preload" as="image" href="https://www.bayesfame.xyz/instagram.svg" />
+  
+
+  
+  <link rel="icon" href="https://www.bayesfame.xyz/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://www.bayesfame.xyz/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.91.0" />
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="详解nostr：nip-13" />
+<meta property="og:description" content="web3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bayesfame.xyz/post/nip-13/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-08T00:00:00+00:00" />
+
+
+  
+  <meta itemprop="name" content="详解nostr：nip-13">
+<meta itemprop="description" content="web3"><meta itemprop="datePublished" content="2023-03-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="50">
+<meta itemprop="keywords" content="web3," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解nostr：nip-13"/>
+<meta name="twitter:description" content="web3"/>
+
+  
+  
+</head>
+
+
+  <body class="not-ready" data-menu="true">
+    <header class="header">
+  
+  <p class="logo">
+    <a class="site-name" href="https://www.bayesfame.xyz/">ZachBlog</a><a class="btn-dark"></a>
+  </p>
+  
+
+  <script>
+    let bodyClx = document.body.classList;
+    let btnDark = document.querySelector('.btn-dark');
+    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+    let darkVal = localStorage.getItem('dark');
+
+    let setDark = (isDark) => {
+      bodyClx[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+    };
+
+    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    requestAnimationFrame(() => bodyClx.remove('not-ready'));
+
+    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
+    sysDark.addEventListener('change', (event) => setDark(event.matches));
+  </script>
+
+  
+  
+  <nav class="menu">
+    
+    <a class="" href="/about/">About</a>
+    
+    <a class="" href="/post/">Post</a>
+    
+  </nav>
+  
+
+  
+  <nav class="social">
+    
+    <a
+      class="twitter"
+      style="--url: url(./twitter.svg)"
+      href="https://twitter.com/Flawles1030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="github"
+      style="--url: url(./github.svg)"
+      href="https://github.com/zach030"
+      target="_blank"
+    ></a>
+    
+    <a
+      class="instagram"
+      style="--url: url(./instagram.svg)"
+      href="https://instagram.com/nan.xiaobei"
+      target="_blank"
+    ></a>
+    
+  </nav>
+  
+</header>
+
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      <time>Mar 8, 2023</time>
+      
+      <span>zach zhou</span>
+      
+    </p>
+    <h1>详解nostr：nip-13</h1>
+  </header>
+  <section class="post-content"><h1 id="nip-13">NIP-13</h1>
+<h2 id="工作量证明">工作量证明</h2>
+<p>本nip定义了一种为nostr笔记生成和验证工作量证明的方法。工作证明(Proof Work，PoW)是将计算工作证明添加到笔记中的一种方法。这是一个承载者证明，所有中继器和客户端都可以通过少量代码进行普遍验证。这个证据可以作为阻止垃圾邮件的一种手段。</p>
+<h2 id="挖矿">挖矿</h2>
+<p>如果要为NIP-01的笔记生成POW，需要加上<code>nonce</code> tag
+<code>{&quot;content&quot;: &quot;It's just me mining my own business&quot;, &quot;tags&quot;: [[&quot;nonce&quot;, &quot;1&quot;, &quot;20&quot;]]}</code>
+当进行挖矿时，nonce标记的第二个条目会被更改，并且id会被重新计算，如果id包含了足够的前导零，那么这个笔记就被挖矿成功，建议在此过程中同步更新<code>created_at</code></p>
+<p>nonce中的第三个对象是挖矿的难度。这使得客户端可以防止大量垃圾邮件发送者针对较低难度的POW证明，例如你要求回复帖子的内容需要目标前导零个数为30，即使回复拥有40bits的难度，你也可以拒绝。没有一个确定的目标难度，你不能拒绝它。</p>
+<h2 id="挖矿示例的帖子">挖矿示例的帖子</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;000006d8c378af1779d2feebc7603a125d99eca0ccf1085959b307f64e5dd358&#34;</span>,
+  <span style="color:#f92672">&#34;pubkey&#34;</span>: <span style="color:#e6db74">&#34;a48380f4cfcc1ad5378294fcac36439770f9c878dd880ffa94bb74ea54a6f243&#34;</span>,
+  <span style="color:#f92672">&#34;created_at&#34;</span>: <span style="color:#ae81ff">1651794653</span>,
+  <span style="color:#f92672">&#34;kind&#34;</span>: <span style="color:#ae81ff">1</span>,
+  <span style="color:#f92672">&#34;tags&#34;</span>: [
+    [
+      <span style="color:#e6db74">&#34;nonce&#34;</span>,
+      <span style="color:#e6db74">&#34;776797&#34;</span>,
+      <span style="color:#e6db74">&#34;20&#34;</span>
+    ]
+  ],
+  <span style="color:#f92672">&#34;content&#34;</span>: <span style="color:#e6db74">&#34;It&#39;s just me mining my own business&#34;</span>,
+  <span style="color:#f92672">&#34;sig&#34;</span>: <span style="color:#e6db74">&#34;284622fc0a3f4f1303455d5175f7ba962a3300d136085b9566801bc2e0699de0c7e31e44c81fb40ad9049173742e904713c3594a1da0fc5d2382a25c11aba977&#34;</span>
+}
+</code></pre></div></section>
+
+  
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.bayesfame.xyz/tags/web3">web3</a>
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="post-nav">
+     
+    <a class="next" href="https://www.bayesfame.xyz/post/nip-12/"><span>详解nostr：nip-12</span><span>→</span></a>
+    
+  </nav>
+  
+
+  
+  
+</article>
+
+</main>
+
+    <footer class="footer">
+  <p>&copy; 2023 <a href="https://www.bayesfame.xyz/">ZachBlog</a></p>
+  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
+  <p>
+    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
+  </p>
+</footer>
+
+  </body>
+</html>

@@ -7,7 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 01 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/web3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/tags/web3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-13</title>
+      <link>https://www.bayesfame.xyz/post/nip-13/</link>
+      <pubDate>Wed, 08 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-13/</guid>
+      <description>NIP-13 工作量证明 本nip定义了一种为nostr笔记生成和验证工作量证明的方法。工作证明(Proof Work，PoW)是将计算工作证明添加到笔记中的一种方法。这是一个承载者证明，所有中继器和客户端都可以通过少量代码进行普遍验证。这个证据可以作为阻止垃圾邮件的一种手段。
+挖矿 如果要为NIP-01的笔记生成POW，需要加上nonce tag {&amp;quot;content&amp;quot;: &amp;quot;It&#39;s just me mining my own business&amp;quot;, &amp;quot;tags&amp;quot;: [[&amp;quot;nonce&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;20&amp;quot;]]} 当进行挖矿时，nonce标记的第二个条目会被更改，并且id会被重新计算，如果id包含了足够的前导零，那么这个笔记就被挖矿成功，建议在此过程中同步更新created_at
+nonce中的第三个对象是挖矿的难度。这使得客户端可以防止大量垃圾邮件发送者针对较低难度的POW证明，例如你要求回复帖子的内容需要目标前导零个数为30，即使回复拥有40bits的难度，你也可以拒绝。没有一个确定的目标难度，你不能拒绝它。
+挖矿示例的帖子 { &amp;#34;id&amp;#34;: &amp;#34;000006d8c378af1779d2feebc7603a125d99eca0ccf1085959b307f64e5dd358&amp;#34;, &amp;#34;pubkey&amp;#34;: &amp;#34;a48380f4cfcc1ad5378294fcac36439770f9c878dd880ffa94bb74ea54a6f243&amp;#34;, &amp;#34;created_at&amp;#34;: 1651794653, &amp;#34;kind&amp;#34;: 1, &amp;#34;tags&amp;#34;: [ [ &amp;#34;nonce&amp;#34;, &amp;#34;776797&amp;#34;, &amp;#34;20&amp;#34; ] ], &amp;#34;content&amp;#34;: &amp;#34;It&amp;#39;s just me mining my own business&amp;#34;, &amp;#34;sig&amp;#34;: &amp;#34;284622fc0a3f4f1303455d5175f7ba962a3300d136085b9566801bc2e0699de0c7e31e44c81fb40ad9049173742e904713c3594a1da0fc5d2382a25c11aba977&amp;#34; } </description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-12</title>
       <link>https://www.bayesfame.xyz/post/nip-12/</link>
