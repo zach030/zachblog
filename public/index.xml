@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 08 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-14&amp;15</title>
+      <link>https://www.bayesfame.xyz/post/nip-1415/</link>
+      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-1415/</guid>
+      <description>NIP-14 文本事件中的主题标记 此NIP定义了文本类型事件中主题标签的用法
+浏览器通常展示列表的消息，每个内容的主题标签可以在这样的列表中被应用，而不是使用消息的前几个单词的方法。这个和网页邮箱客户端展示新来邮件的主题而不是内容的方式很相似。
+当回复一个带有主题的消息时，客户端应该复制此主题标签。客户可以在标题前加上“ Re:”来表示是回复。
+主题一般应短于80字符。长主题可能会被客户端截断。
+NIP-15 发送事件完毕通知 中继器应该支持在发送本地存储的全部事件后向客户端发送通知
+支持此NIP的中继器在发送完本地存储的全部事件后应该向客户端发送EOSE消息，格式是[&amp;quot;EOSE&amp;quot;, &amp;lt;subscription_id&amp;gt;]
+客户端行为 客户端应该使用 support _nips 字段来了解中继器是否支持存储事件通知的结束
+提议动机 这个提议的动机是为了减少不确定性，当所有事件都通过中继发送，使客户端代码可能不那么复杂。</description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-13</title>
       <link>https://www.bayesfame.xyz/post/nip-13/</link>
