@@ -7,7 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Thu, 09 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解nostr：nip-16</title>
+      <link>https://www.bayesfame.xyz/post/nip-16/</link>
+      <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/nip-16/</guid>
+      <description>NIP-16 事件处理 中继器可以允许替换或者短暂类型的事件
+常规的事件 常规事件是通过kind定义在1000到10000以内的。当接收到常规的事件时，中继器应该将它发送给所有满足订阅过滤条件的客户端，并且中继器需要存储该事件。
+可替换的事件 可替换的事件kind定义在10000到20000之间，当一个可替换事件的时间戳比当前已知的最新可替换事件的时间戳更新，并且接收到了相同类型的可替换事件，并且使用相同的密钥签名时，旧的事件应该被丢弃，并用新的事件替换。
+短暂的事件 短暂的事件定义的kind在20000到30000指尖，当接收到短暂的事件消息后，中继器应该将该事件发送给全部满足过滤条件的客户端，并且不应该进行存储。
+客户端行为 客户端应该使用 support _nips 字段来了解中继是否支持这个 NIP。客户端不应该向不支持此 NIP 的中继器发送短暂事件; 它们很可能被持久化。客户端可能会发送可替换的事件到继电器，可能不支持这个 NIP，客户端查询应该准备中继器发送多个事件，应该使用最新的一个。
+建议的用例  状态: 应用程序可以创建一个状态事件，每次设置一个新状态(比如状态)时将替换该事件 类型指示器: 聊天应用程序可以使用临时事件作为类型指示器。 消息传递: 两个 pubkey 可以使用临时事件通过 nostr 传递消息。  </description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-14&amp;15</title>
       <link>https://www.bayesfame.xyz/post/nip-1415/</link>
