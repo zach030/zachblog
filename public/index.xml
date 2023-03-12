@@ -7,7 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ch</language>
     <copyright>Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bayesfame.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>周刊01:0306-0311</title>
+      <link>https://www.bayesfame.xyz/post/weekly0306-0311/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bayesfame.xyz/post/weekly0306-0311/</guid>
+      <description>当你停止创造，你的才能就不再重要，剩下的只有品味，品味会排斥其他人，让你变得更狭隘，所以，要创造。
+ offline reader 这周对自己的信息系统又做了大变动，清理了无用的消息源，也再次使用系统的app限制时间来控制自己的注意力。
+当再次把cubox利用起来时，惊喜的发现在阅读很久之前收藏的文章时仍有新的触动和思考，看到之前自己的批注也会惊奇，这真的是自己会写出来的文字吗？人总是在间歇的遗忘后质疑自己的能力
+这是当时针对“终局”和“里程碑”的标注：
+ 到达这个终局过程中的空白难道就没有红利吗？所以看终局，更要看到终局的距离和里程碑 https://cubox.pro/share/1GtHrO
+ 因此我想到一个词&amp;quot;offline reader&amp;quot;，首先是因为offline可以保证自己的专注，避免其他信息的干扰，其次offline的读物应该是常读常新的，不追逐热点可以贯穿时间的长河，因此需要摄入高质量的信息并通过cubox等工具时常回顾
+AI And Other Stuff 这段时间最热的无疑就是AI了，最近针对这方面也有很多的思考，对于独立开发者来说是一个有无穷想象空间的领域
+但是目前的产品大多是对prompt的封装，或是基于embeding的模型应用，AI很强大但是人们的应用还是缺乏了些想象力，可以持续学习和观望
+下面是近期的一些思考汇总：
+https://m.okjike.com/originalPosts/640b1f391fdac100df159657?s=ewoidSI6ICI1YmI4NDRjMWQ5OWM3ZjAwMTFiODJkYzgiCn0=
+https://m.okjike.com/originalPosts/640965b11fdac100dfe32e31?s=ewoidSI6ICI1YmI4NDRjMWQ5OWM3ZjAwMTFiODJkYzgiCn0=
+https://m.okjike.com/originalPosts/6406cb5f9b6b80ed427b9e23?s=ewoidSI6ICI1YmI4NDRjMWQ5OWM3ZjAwMTFiODJkYzgiCn0=
+https://m.okjike.com/originalPosts/6406c16859020550aff08ffe?s=ewoidSI6ICI1YmI4NDRjMWQ5OWM3ZjAwMTFiODJkYzgiCn0=
+至于标题中的&amp;quot;Other Stuff&amp;quot;就是关于nostr了，标题的灵感也就来自nostr的&amp;quot;Notes and other stuff&amp;quot;
+最近一直在翻译nip，对nostr协议也有了些深入的理解，初见nostr协议时感觉很有趣，但周边人的态度大多是不太看好的，就是一个p2p协议，新的smtp协议等等
+因为自己之前对协议相关的历史了解的比较少，但其实太阳下面无新事，这些新兴的协议在过去都可以看得到影子，就像比特币也不过是前人很多技术发展的集大成者，在这里不想过分纠结技术的发展，而是以此告诫自己，任何成就都不是一蹴而就的，不要因为不是终局就感到失望。最后点个题，“要创造”。</description>
+    </item>
+    
     <item>
       <title>详解nostr：nip-16</title>
       <link>https://www.bayesfame.xyz/post/nip-16/</link>
